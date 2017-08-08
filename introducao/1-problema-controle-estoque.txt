@@ -1,0 +1,86 @@
+
+Desenvolver um programa de computador para cadastro de estoque, aquisições e vendas de produtos em uma empresa.
+
+Produto
+ atributos:
+  - código
+  - nome
+  - preço
+
+Fornecedor
+ atributos:
+  - código
+  - nome-fantasia
+  - razão social
+  - endereço
+  - CNPJ
+  - inscrição estadual
+  - telefone
+  - email
+
+Cliente
+ atributos:
+  - código
+  - nome
+  - endereço
+  - telefone
+  - email
+  
+Cliente-Pessoa-Física (especialização de Cliente)
+ atributos:
+  - CPF
+  - sexo
+  - nome
+  - data de nascimento
+
+Cliente-Pessoa-Jurídica (especialização de Cliente)
+ atributos:
+  - CNPJ
+  - inscrição estadual
+  - nome-fantasia
+  - razão social
+
+Funcionário
+ atributos:
+  - código
+  - nome
+  - CPF
+  - endereço
+  - telefone
+  - email
+
+Vendedor (especialização de Funcionário)
+  
+Comprador (especialização de Funcionário)
+
+Compra
+ atributos:
+  - código
+  - data
+  - valor-total
+  - comprador
+  - fornecedor
+  
+Item-Compra
+ atributos:
+  - código
+  - compra
+  - produto
+  - preço-de-compra
+  - quantidade
+
+Venda
+ atributos:
+  - código
+  - data
+  - valor-total
+  - vendedor
+  - cliente
+
+Item-Venda
+ atributos:
+  - código
+  - venda
+  - produto
+  - preço-de-venda
+  - quantidade
