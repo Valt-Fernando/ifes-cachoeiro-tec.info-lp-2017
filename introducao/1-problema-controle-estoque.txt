@@ -21,7 +21,6 @@ Fornecedor
 Cliente
  atributos:
   - código
-  - nome
   - endereço
   - telefone
   - email
