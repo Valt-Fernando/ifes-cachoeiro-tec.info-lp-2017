@@ -3,9 +3,8 @@
  */
 package controleestoque;
 
-import controleestoque.entidades.Produto;
+import controleestoque.armazenamento.ArmazenamentoProduto;
 import controleestoque.fronteiras.MenuPrincipal;
-import java.util.ArrayList;
 
 /**
  *
@@ -13,14 +12,12 @@ import java.util.ArrayList;
  */
 public class ControleEstoque {
     
-    public static ArrayList<Produto> LISTA_PRODUTO;
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // inicialização dos dados:
-        LISTA_PRODUTO = new ArrayList<>();
+        ArmazenamentoProduto.iniciarLista();
         
         MenuPrincipal qualquerNome = new MenuPrincipal();
         qualquerNome.exibirMenu();

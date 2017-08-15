@@ -86,7 +86,62 @@ public class CadastroProduto {
     }
     
     private void alterar() {
+        System.out.println("\nAlterar registro de produto.\n");
         
+        // obter o código do produto a alterar
+        System.out.print(" - Código: ");
+        long codigo = input.nextLong();
+        input.nextLine();
+        
+        Produto produtoParaAlterar = null;
+        // procurar o produto para alterar na lista de produtos
+        for (Produto p : ControleEstoque.LISTA_PRODUTO) {
+            if (p.getCodigo() == codigo) {
+                produtoParaAlterar = p;
+                break;
+            }
+        }
+        // caso não encontre, exibir mensagem de erro ao usuário
+        if (produtoParaAlterar == null) {
+            System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
+            return;
+        }
+        
+        // exibir nome
+        System.out.println("\n - Nome: " + produtoParaAlterar.getNome());
+        // perguntar se quer alterar o nome
+        System.out.print(" --> Alterar o nome? (s=sim/n=não) ");
+        char opcaoNome = input.nextLine().charAt(0);
+        
+        String nome = produtoParaAlterar.getNome();
+        if (opcaoNome == 's') {
+            System.out.print(" - Novo nome: ");
+            nome = input.nextLine();
+        }
+        
+        // exibir preço
+        System.out.printf("\n - Preço: %.2f\n", produtoParaAlterar.getPreco());
+        // perguntar se quer alterar o preço
+        System.out.print(" --> Alterar o preço? (s=sim/n=não) ");
+        char opcaoPreco = input.nextLine().charAt(0);
+        
+        double preco = produtoParaAlterar.getPreco();
+        if (opcaoPreco == 's') {
+            System.out.print(" - Novo preço: ");
+            preco = input.nextDouble();
+        }
+        
+        // confirmação final!!!
+        System.out.println("\nConfirma alteração do produto?");
+        System.out.printf(" - Código: %d\n", produtoParaAlterar.getCodigo());
+        System.out.printf(" - Nome..: %s\n", nome);
+        System.out.printf(" - Preço.: %.2f\n", preco);
+        System.out.print(" --> (s=sim/n=não) ");
+        char opcao = input.nextLine().charAt(0);
+        if (opcao == 's') {
+            produtoParaAlterar.setNome(nome);
+            produtoParaAlterar.setPreco(preco);
+        }
     }
     
     private void excluir() {
