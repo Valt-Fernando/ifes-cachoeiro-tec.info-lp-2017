@@ -4,6 +4,7 @@
 package controleestoque.fronteiras;
 
 import controleestoque.ControleEstoque;
+import controleestoque.armazenamento.ArmazenamentoProduto;
 import controleestoque.entidades.Produto;
 import java.util.Scanner;
 
@@ -71,7 +72,7 @@ public class CadastroProduto {
         double preco = input.nextDouble();
         
         Produto novoProduto = new Produto(codigo, nome, preco);
-        ControleEstoque.LISTA_PRODUTO.add(novoProduto);
+        ArmazenamentoProduto.inserir(novoProduto);
     }
     
     private void listar() {
@@ -79,7 +80,7 @@ public class CadastroProduto {
         System.out.println("+--------+--------------------------------+------------+");
         System.out.println("| Código | Nome                           | Preço      |");
         System.out.println("+--------+--------------------------------+------------+");
-        for (Produto p : ControleEstoque.LISTA_PRODUTO) {
+        for (Produto p : ArmazenamentoProduto.getLista()) {
             System.out.printf("| %6d | %-30s | %10.2f |\n", p.getCodigo(), p.getNome(), p.getPreco());
         }
         System.out.println("+--------+--------------------------------+------------+");
@@ -93,14 +94,10 @@ public class CadastroProduto {
         long codigo = input.nextLong();
         input.nextLine();
         
-        Produto produtoParaAlterar = null;
         // procurar o produto para alterar na lista de produtos
-        for (Produto p : ControleEstoque.LISTA_PRODUTO) {
-            if (p.getCodigo() == codigo) {
-                produtoParaAlterar = p;
-                break;
-            }
-        }
+        Produto p = new Produto(codigo, "", 0);
+        Produto produtoParaAlterar = ArmazenamentoProduto.buscar(p);
+
         // caso não encontre, exibir mensagem de erro ao usuário
         if (produtoParaAlterar == null) {
             System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
@@ -139,8 +136,8 @@ public class CadastroProduto {
         System.out.print(" --> (s=sim/n=não) ");
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            produtoParaAlterar.setNome(nome);
-            produtoParaAlterar.setPreco(preco);
+            Produto produtoAlterado = new Produto(codigo, nome, preco);
+            ArmazenamentoProduto.alterar(produtoAlterado);
         }
     }
     
