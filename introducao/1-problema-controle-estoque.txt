@@ -6,6 +6,11 @@ Produto
   - código
   - nome
   - preço
+  
+  --> Foi implementado:
+    - Classe: entidades.Produto
+    - Classe: armazenamento.ArmazenamentoProduto
+    - Classe: fronteiras.CadastroProduto
 
 Fornecedor
  atributos:
@@ -18,6 +23,11 @@ Fornecedor
   - telefone
   - email
 
+  --> Implementar:
+    - Classe: entidades.Fornecedor (já pronta)
+    - Classe: armazenamento.ArmazenamentoFornecedor
+    - Classe: fronteiras.CadastroFornecedor
+  
 Cliente
  atributos:
   - código

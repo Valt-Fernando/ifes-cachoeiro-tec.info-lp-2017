@@ -3,15 +3,15 @@
  */
 package controleestoque.fronteiras;
 
-import controleestoque.armazenamento.ArmazenamentoProduto;
-import controleestoque.entidades.Produto;
+import controleestoque.armazenamento.ArmazenamentoFornecedor;
+import controleestoque.entidades.Fornecedor;
 import java.util.Scanner;
 
 /**
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class CadastroProduto {
+public class CadastroFornecedor {
 
     private static final int OPCAO_INSERIR = 1;
     private static final int OPCAO_LISTAR = 2;
@@ -26,7 +26,7 @@ public class CadastroProduto {
         
         int opcao = 0;
         while (opcao != OPCAO_VOLTAR_MENU_ANTERIOR) {
-            System.out.println("\n\nOpções do cadastro de produtos:");
+            System.out.println("\n\nOpções do cadastro de fornecedores:");
             System.out.println(" 1 - Inserir");
             System.out.println(" 2 - Listar");
             System.out.println(" 3 - Alterar");
@@ -61,28 +61,42 @@ public class CadastroProduto {
     }
     
     private void inserir() {
-        System.out.println("\nInserir novo registro de produto.\n");
-        System.out.print(" - Código: ");
+        System.out.println("\nInserir novo registro de fornecedor.\n");
+        System.out.print(" - Código............: ");
         long codigo = input.nextLong();
         input.nextLine(); // <------------------- para consumir a quebra-de-linha!
-        System.out.print(" - Nome..: ");
-        String nome = input.nextLine();
-        System.out.print(" - Preço.: ");
-        double preco = input.nextDouble();
+        System.out.print(" - Nome fantasia.....: ");
+        String nomeFantasia = input.nextLine();
+        System.out.print(" - Razão social......: ");
+        String razaoSocial = input.nextLine();
+        System.out.print(" - Endereço..........: ");
+        String endereco = input.nextLine();
+        System.out.print(" - CNPJ..............: ");
+        long cnpj = input.nextLong();
+        System.out.print(" - Inscrição estadual: ");
+        long inscricaoEstadual = input.nextLong();
+        input.nextLine(); // <------------------- para consumir a quebra-de-linha!
+        System.out.print(" - Telefone..........: ");
+        String telefone = input.nextLine();
+        System.out.print(" - Email.............: ");
+        String email = input.nextLine();
         
-        Produto novoProduto = new Produto(codigo, nome, preco);
-        ArmazenamentoProduto.inserir(novoProduto);
+        Fornecedor novoFornecedor = new Fornecedor(codigo, nomeFantasia, 
+                razaoSocial, endereco, cnpj, inscricaoEstadual, telefone, email);
+        ArmazenamentoFornecedor.inserir(novoFornecedor);
     }
     
     private void listar() {
-        System.out.println("\nListagem de produtos registrados.\n");
-        System.out.println("+--------+--------------------------------+------------+");
-        System.out.println("| Código | Nome                           | Preço      |");
-        System.out.println("+--------+--------------------------------+------------+");
-        for (Produto p : ArmazenamentoProduto.getLista()) {
-            System.out.printf("| %6d | %-30s | %10.2f |\n", p.getCodigo(), p.getNome(), p.getPreco());
+        System.out.println("\nListagem de fornecedores registrados.\n");
+        System.out.println("+--------+--------------------------------+-------------+-----------+-------------------+");
+        System.out.println("| Código | Nome Fantasia                  | CNPJ        | Insc.Est. | Telefone          |");
+        System.out.println("+--------+--------------------------------+-------------+-----------+-------------------+");
+        for (Fornecedor f : ArmazenamentoFornecedor.getLista()) {
+            System.out.printf("| %6d | %-30s | %11d | %9d | %17s |\n", f.getCodigo(), 
+                    f.getNomeFantasia(), f.getCnpj(), f.getInscricaoEstadual(),
+                    f.getTelefone());
         }
-        System.out.println("+--------+--------------------------------+------------+");
+        System.out.println("+--------+--------------------------------+-------------+-----------+-------------------+");
     }
     
     private void alterar() {
