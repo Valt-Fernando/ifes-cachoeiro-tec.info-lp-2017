@@ -100,51 +100,119 @@ public class CadastroFornecedor {
     }
     
     private void alterar() {
-        System.out.println("\nAlterar registro de produto.\n");
+        System.out.println("\nAlterar registro de fornecedor.\n");
         
-        // obter o código do produto a alterar
+        // obter o código do fornecedor a alterar
         System.out.print(" - Código: ");
         long codigo = input.nextLong();
         input.nextLine();
         
-        // procurar o produto para alterar na lista de produtos
-        Produto p = new Produto(codigo, "", 0);
-        Produto produtoParaAlterar = ArmazenamentoProduto.buscar(p);
+        // procurar o fornecedor para alterar na lista de fornecedores
+        Fornecedor f = new Fornecedor(codigo);
+        Fornecedor fornecedorParaAlterar = ArmazenamentoFornecedor.buscar(f);
 
         // caso não encontre, exibir mensagem de erro ao usuário
-        if (produtoParaAlterar == null) {
-            System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
+        if (fornecedorParaAlterar == null) {
+            System.out.println("NÃO HÁ FORNECEDOR CADASTRADO COM O CÓDIGO INFORMADO.");
             return;
         }
         
-        // exibir nome
-        System.out.println("\n - Nome: " + produtoParaAlterar.getNome());
-        // perguntar se quer alterar o nome
-        System.out.print(" --> Alterar o nome? (s=sim/n=não) ");
-        char opcaoNome = input.nextLine().charAt(0);
+        // exibir nome fantasia
+        System.out.println("\n - Nome fantasia: " + 
+                fornecedorParaAlterar.getNomeFantasia());
+        // perguntar se quer alterar o nome fantasia
+        System.out.print(" --> Alterar o nome fantasia? (s=sim/n=não) ");
+        char opcaoNomeFantasia = input.nextLine().charAt(0);
         
-        String nome = produtoParaAlterar.getNome();
-        if (opcaoNome == 's') {
-            System.out.print(" - Novo nome: ");
-            nome = input.nextLine();
+        String nomeFantasia = fornecedorParaAlterar.getNomeFantasia();
+        if (opcaoNomeFantasia == 's') {
+            System.out.print(" - Novo nome fantasia: ");
+            nomeFantasia = input.nextLine();
         }
         
-        // exibir preço
-        System.out.printf("\n - Preço: %.2f\n", produtoParaAlterar.getPreco());
-        // perguntar se quer alterar o preço
-        System.out.print(" --> Alterar o preço? (s=sim/n=não) ");
-        char opcaoPreco = input.nextLine().charAt(0);
+        // exibir razão social
+        System.out.println("\n - Razão social: " + 
+                fornecedorParaAlterar.getRazaoSocial());
+        // perguntar se quer alterar a razão social
+        System.out.print(" --> Alterar a razão social? (s=sim/n=não) ");
+        char opcaoRazaoSocial = input.nextLine().charAt(0);
         
-        double preco = produtoParaAlterar.getPreco();
-        if (opcaoPreco == 's') {
-            System.out.print(" - Novo preço: ");
-            preco = input.nextDouble();
+        String razaoSocial = fornecedorParaAlterar.getRazaoSocial();
+        if (opcaoRazaoSocial == 's') {
+            System.out.print(" - Nova razão social: ");
+            razaoSocial = input.nextLine();
+        }
+        
+        // exibir endereço
+        System.out.println("\n - Endereço: " + 
+                fornecedorParaAlterar.getEndereco());
+        // perguntar se quer alterar o endereço
+        System.out.print(" --> Alterar o endereço? (s=sim/n=não) ");
+        char opcaoEndereco = input.nextLine().charAt(0);
+        
+        String endereco = fornecedorParaAlterar.getEndereco();
+        if (opcaoEndereco == 's') {
+            System.out.print(" - Novo endereço: ");
+            endereco = input.nextLine();
+        }
+        
+        // exibir CNPJ
+        System.out.println("\n - CNPJ: " + 
+                fornecedorParaAlterar.getCnpj());
+        // perguntar se quer alterar o CNPJ
+        System.out.print(" --> Alterar o CNPJ? (s=sim/n=não) ");
+        char opcaoCnpj = input.nextLine().charAt(0);
+        
+        long cnpj = fornecedorParaAlterar.getCnpj();
+        if (opcaoCnpj == 's') {
+            System.out.print(" - Novo CNPJ: ");
+            cnpj = input.nextLong();
             input.nextLine();
+        }
+        
+        // exibir inscrição estadual
+        System.out.println("\n - Inscrição Estadual: " + 
+                fornecedorParaAlterar.getInscricaoEstadual());
+        // perguntar se quer alterar a inscrição estadual
+        System.out.print(" --> Alterar a Inscrição Estadual? (s=sim/n=não) ");
+        char opcaoInscricaoEstadual = input.nextLine().charAt(0);
+        
+        long inscricaoEstadual = fornecedorParaAlterar.getInscricaoEstadual();
+        if (opcaoInscricaoEstadual == 's') {
+            System.out.print(" - Nova Inscrição Estadual: ");
+            inscricaoEstadual = input.nextLong();
+            input.nextLine();
+        }
+        
+        // exibir telefone
+        System.out.println("\n - Telefone: " + 
+                fornecedorParaAlterar.getTelefone());
+        // perguntar se quer alterar o telefone
+        System.out.print(" --> Alterar o telefone? (s=sim/n=não) ");
+        char opcaoTelefone = input.nextLine().charAt(0);
+        
+        String telefone = fornecedorParaAlterar.getTelefone();
+        if (opcaoTelefone == 's') {
+            System.out.print(" - Novo telefone: ");
+            telefone = input.nextLine();
+        }
+        
+        // exibir email
+        System.out.println("\n - Email: " + 
+                fornecedorParaAlterar.getEmail());
+        // perguntar se quer alterar o email
+        System.out.print(" --> Alterar o email? (s=sim/n=não) ");
+        char opcaoEmail = input.nextLine().charAt(0);
+        
+        String email = fornecedorParaAlterar.getEmail();
+        if (opcaoEmail == 's') {
+            System.out.print(" - Novo email: ");
+            email = input.nextLine();
         }
         
         // confirmação final!!!
         System.out.println("\nConfirma alteração do produto?");
-        System.out.printf(" - Código: %d\n", produtoParaAlterar.getCodigo());
+        System.out.printf(" - Código: %d\n", fornecedorParaAlterar.getCodigo());
         System.out.printf(" - Nome..: %s\n", nome);
         System.out.printf(" - Preço.: %.2f\n", preco);
         System.out.print(" --> (s=sim/n=não) ");

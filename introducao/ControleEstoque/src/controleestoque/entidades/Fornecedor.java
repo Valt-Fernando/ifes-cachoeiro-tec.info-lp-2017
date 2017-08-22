@@ -29,6 +29,10 @@ public class Fornecedor {
         this.telefone = telefone;
         this.email = email;
     }
+    
+    public Fornecedor(long codigo) {
+        this.codigo = codigo;
+    }
 
     public long getCodigo() {
         return codigo;
