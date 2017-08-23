@@ -43,6 +43,8 @@ public class MenuPrincipal {
             case OPCAO_CADASTRO_CLIENTE:
                 break;
             case OPCAO_CADASTRO_FORNECEDOR:
+                CadastroFornecedor cadastroFornecedor = new CadastroFornecedor();
+                cadastroFornecedor.exibirMenu();
                 break;
             case OPCAO_CADASTRO_PRODUTO:
                 CadastroProduto cadastroProduto = new CadastroProduto();

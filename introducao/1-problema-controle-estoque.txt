@@ -11,6 +11,8 @@ Produto
     - Classe: entidades.Produto
     - Classe: armazenamento.ArmazenamentoProduto
     - Classe: fronteiras.CadastroProduto
+  --> Acrescentar chamada ao método exibirMenu da classe CadastroProduto ao método processarOpcaoUsuario da classe MenuPrincipal
+  --> Acrescentar chamada ao método iniciarLista da classe ArmazenamentoProduto ao método main da classe ControleEstoque
 
 Fornecedor
  atributos:
@@ -18,7 +20,7 @@ Fornecedor
   - nome-fantasia
   - razão social
   - endereço
-  - CNPJ
+  - CNPJ 			11223562000200		11.223.562/0002-00
   - inscrição estadual
   - telefone
   - email
@@ -27,6 +29,8 @@ Fornecedor
     - Classe: entidades.Fornecedor (já pronta)
     - Classe: armazenamento.ArmazenamentoFornecedor
     - Classe: fronteiras.CadastroFornecedor
+  --> Acrescentar chamada ao método exibirMenu da classe CadastroFornecedor ao método processarOpcaoUsuario da classe MenuPrincipal
+  --> Acrescentar chamada ao método iniciarLista da classe ArmazenamentoFornecedor ao método main da classe ControleEstoque
   
 Cliente
  atributos:

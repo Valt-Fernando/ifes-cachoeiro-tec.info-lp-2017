@@ -3,6 +3,7 @@
  */
 package controleestoque;
 
+import controleestoque.armazenamento.ArmazenamentoFornecedor;
 import controleestoque.armazenamento.ArmazenamentoProduto;
 import controleestoque.fronteiras.MenuPrincipal;
 
@@ -18,6 +19,7 @@ public class ControleEstoque {
     public static void main(String[] args) {
         // inicialização dos dados:
         ArmazenamentoProduto.iniciarLista();
+        ArmazenamentoFornecedor.iniciarLista();
         
         MenuPrincipal qualquerNome = new MenuPrincipal();
         qualquerNome.exibirMenu();

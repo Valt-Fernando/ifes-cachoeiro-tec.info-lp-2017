@@ -5,6 +5,7 @@ package controleestoque.fronteiras;
 
 import controleestoque.armazenamento.ArmazenamentoFornecedor;
 import controleestoque.entidades.Fornecedor;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -88,15 +89,24 @@ public class CadastroFornecedor {
     
     private void listar() {
         System.out.println("\nListagem de fornecedores registrados.\n");
-        System.out.println("+--------+--------------------------------+-------------+-----------+-------------------+");
-        System.out.println("| Código | Nome Fantasia                  | CNPJ        | Insc.Est. | Telefone          |");
-        System.out.println("+--------+--------------------------------+-------------+-----------+-------------------+");
+        System.out.println("+--------+--------------------------------+----------------+-----------+-------------------+");
+        System.out.println("| Código | Nome Fantasia                  | CNPJ           | Insc.Est. | Telefone          |");
+        System.out.println("+--------+--------------------------------+----------------+-----------+-------------------+");
         for (Fornecedor f : ArmazenamentoFornecedor.getLista()) {
-            System.out.printf("| %6d | %-30s | %11d | %9d | %17s |\n", f.getCodigo(), 
+            System.out.printf("| %6d | %-30s | %14d | %9d | %17s |\n", f.getCodigo(), 
                     f.getNomeFantasia(), f.getCnpj(), f.getInscricaoEstadual(),
                     f.getTelefone());
         }
-        System.out.println("+--------+--------------------------------+-------------+-----------+-------------------+");
+        System.out.println("+--------+--------------------------------+----------------+-----------+-------------------+");
+    }
+    
+    // 11223562000200 -> 11.223.562/0002-00
+    private String formatarCnpj(long cnpj) {
+        String cnpjFormatado = "";
+        
+        // formatar o cnpj
+        
+        return cnpjFormatado;
     }
     
     private void alterar() {
@@ -157,8 +167,9 @@ public class CadastroFornecedor {
         }
         
         // exibir CNPJ
-        System.out.println("\n - CNPJ: " + 
-                fornecedorParaAlterar.getCnpj());
+        String cnpjFormatado = formatarCnpj(fornecedorParaAlterar.getCnpj());
+        System.out.println("\n - CNPJ: " + cnpjFormatado);
+        
         // perguntar se quer alterar o CNPJ
         System.out.print(" --> Alterar o CNPJ? (s=sim/n=não) ");
         char opcaoCnpj = input.nextLine().charAt(0);
@@ -211,42 +222,63 @@ public class CadastroFornecedor {
         }
         
         // confirmação final!!!
-        System.out.println("\nConfirma alteração do produto?");
-        System.out.printf(" - Código: %d\n", fornecedorParaAlterar.getCodigo());
-        System.out.printf(" - Nome..: %s\n", nome);
-        System.out.printf(" - Preço.: %.2f\n", preco);
+        System.out.println("\nConfirma alteração do fornecedor?");
+        System.out.printf(" - Código............: %d\n", 
+                fornecedorParaAlterar.getCodigo());
+        System.out.printf(" - Nome fantasia.....: %s\n", nomeFantasia);
+        System.out.printf(" - Razão social......: %s\n", razaoSocial);
+        System.out.printf(" - Endereço..........: %s\n", endereco);
+        System.out.printf(" - CNPJ..............: %d\n", cnpj);
+        System.out.printf(" - Inscrição Estadual: %d\n", inscricaoEstadual);
+        System.out.printf(" - Telefone..........: %s\n", telefone);
+        System.out.printf(" - Email.............: %s\n", email);
         System.out.print(" --> (s=sim/n=não) ");
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            Produto produtoAlterado = new Produto(codigo, nome, preco);
-            ArmazenamentoProduto.alterar(produtoAlterado);
+            Fornecedor fornecedorAlterado = new Fornecedor(codigo, 
+                    nomeFantasia, razaoSocial, endereco, cnpj, 
+                    inscricaoEstadual, telefone, email);
+            ArmazenamentoFornecedor.alterar(fornecedorAlterado);
         }
     }
     
     private void excluir() {
-        System.out.println("\nExcluir registro de produto.\n");
+        System.out.println("\nExcluir registro de fornecedor.\n");
         
-        // obter o código do produto a excluir
-        System.out.print(" - Código do produto a excluir: ");
+        // obter o código do fornecedor a excluir
+        System.out.print(" - Código do fornecedor a excluir: ");
         long codigo = input.nextLong();
         input.nextLine();
         
-        // buscar dados do produto para confirmação de exclusão
-        Produto parametroBusca = new Produto(codigo, "", 0);
-        Produto produtoExcluir = ArmazenamentoProduto.buscar(parametroBusca);
+        // buscar dados do fornecedor para confirmação de exclusão
+        Fornecedor parametroBusca = new Fornecedor(codigo);
+        Fornecedor fornecedorExcluir = ArmazenamentoFornecedor
+                .buscar(parametroBusca);
         
-        if (produtoExcluir == null) {
-            System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
+        if (fornecedorExcluir == null) {
+            System.out.println("NÃO HÁ FORNECEDOR CADASTRADO COM O CÓDIGO INFORMADO.");
             return;
         }
         
-        System.out.println(" - Nome.: " + produtoExcluir.getNome());
-        System.out.printf(" - Preço: %.2f\n", produtoExcluir.getPreco());
+        System.out.printf(" - Nome fantasia.....: %s\n", 
+                fornecedorExcluir.getNomeFantasia());
+        System.out.printf(" - Razão social......: %s\n", 
+                fornecedorExcluir.getRazaoSocial());
+        System.out.printf(" - Endereço..........: %s\n", 
+                fornecedorExcluir.getEndereco());
+        System.out.printf(" - CNPJ..............: %d\n", 
+                fornecedorExcluir.getCnpj());
+        System.out.printf(" - Inscrição Estadual: %d\n", 
+                fornecedorExcluir.getInscricaoEstadual());
+        System.out.printf(" - Telefone..........: %s\n", 
+                fornecedorExcluir.getTelefone());
+        System.out.printf(" - Email.............: %s\n", 
+                fornecedorExcluir.getEmail());
         System.out.print("\n  --> Confirma exclusão? (s=sim/n=não) ");
         
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            ArmazenamentoProduto.excluir(produtoExcluir);
+            ArmazenamentoFornecedor.excluir(fornecedorExcluir);
         }
     }
 }
