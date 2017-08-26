@@ -7,11 +7,7 @@ import controleestoque.armazenamento.ArmazenamentoFornecedor;
 import controleestoque.entidades.Fornecedor;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
