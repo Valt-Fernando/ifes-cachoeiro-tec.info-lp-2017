@@ -53,6 +53,14 @@ Cliente-Pessoa-Jurídica (especialização de Cliente)
   - nome-fantasia
   - razão social
 
+  --> Implementar:
+    - Classe: entidades.Cliente, entidades.ClientePessoaFisica,
+    entidades.ClientePessoaJuridica (já prontas)
+    - Classe: armazenamento.ArmazenamentoCliente (pronta)
+    - Classe: fronteiras.CadastroCliente
+  --> Acrescentar chamada ao método exibirMenu da classe CadastroCliente ao método processarOpcaoUsuario da classe MenuPrincipal
+  --> Acrescentar chamada ao método iniciarLista da classe ArmazenamentoCliente ao método main da classe ControleEstoque
+  
 Funcionário
  atributos:
   - código

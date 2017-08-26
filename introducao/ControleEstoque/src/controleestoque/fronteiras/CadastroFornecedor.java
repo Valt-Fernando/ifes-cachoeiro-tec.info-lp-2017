@@ -6,7 +6,11 @@ package controleestoque.fronteiras;
 import controleestoque.armazenamento.ArmazenamentoFornecedor;
 import controleestoque.entidades.Fornecedor;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -89,22 +93,28 @@ public class CadastroFornecedor {
     
     private void listar() {
         System.out.println("\nListagem de fornecedores registrados.\n");
-        System.out.println("+--------+--------------------------------+----------------+-----------+-------------------+");
-        System.out.println("| Código | Nome Fantasia                  | CNPJ           | Insc.Est. | Telefone          |");
-        System.out.println("+--------+--------------------------------+----------------+-----------+-------------------+");
+        System.out.println("+--------+--------------------------------+--------------------+-----------+-------------------+");
+        System.out.println("| Código | Nome Fantasia                  | CNPJ               | Insc.Est. | Telefone          |");
+        System.out.println("+--------+--------------------------------+--------------------+-----------+-------------------+");
         for (Fornecedor f : ArmazenamentoFornecedor.getLista()) {
-            System.out.printf("| %6d | %-30s | %14d | %9d | %17s |\n", f.getCodigo(), 
-                    f.getNomeFantasia(), f.getCnpj(), f.getInscricaoEstadual(),
+            System.out.printf("| %6d | %-30s | %18s | %9d | %17s |\n", f.getCodigo(), 
+                    f.getNomeFantasia(), formatarCnpj(f.getCnpj()), f.getInscricaoEstadual(),
                     f.getTelefone());
         }
-        System.out.println("+--------+--------------------------------+----------------+-----------+-------------------+");
+        System.out.println("+--------+--------------------------------+--------------------+-----------+-------------------+");
     }
     
     // 11223562000200 -> 11.223.562/0002-00
-    private String formatarCnpj(long cnpj) {
+    public static String formatarCnpj(long cnpj) {
         String cnpjFormatado = "";
         
         // formatar o cnpj
+        StringBuilder sb = new StringBuilder(Long.toString(cnpj));
+        sb.insert(2, '.');
+        sb.insert(6, '.');
+        sb.insert(10, '/');
+        sb.insert(15, '-');
+        cnpjFormatado = sb.toString();
         
         return cnpjFormatado;
     }
