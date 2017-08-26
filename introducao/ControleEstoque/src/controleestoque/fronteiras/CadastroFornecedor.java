@@ -6,6 +6,7 @@ package controleestoque.fronteiras;
 import controleestoque.armazenamento.ArmazenamentoFornecedor;
 import controleestoque.entidades.Fornecedor;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -109,7 +110,8 @@ public class CadastroFornecedor {
         String cnpjFormatado = "";
         
         // formatar o cnpj
-        StringBuilder sb = new StringBuilder(Long.toString(cnpj));
+        NumberFormat nf = new DecimalFormat("00000000000000");
+        StringBuilder sb = new StringBuilder(nf.format(cnpj));
         sb.insert(2, '.');
         sb.insert(6, '.');
         sb.insert(10, '/');

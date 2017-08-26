@@ -176,95 +176,114 @@ public class CadastroCliente {
         for (Cliente c : ArmazenamentoCliente.getLista()) {
             if (c instanceof ClientePessoaFisica) {
                 ClientePessoaFisica cPF = (ClientePessoaFisica) c;
-                System.out.printf("| %6d | %-30s | %-15s | %18s | %15s |\n", cPF.getCodigo(), cPF.getNome(), "F", cPF.getCpf(), cPF.getTelefone());
+                System.out.printf("| %6d | %-30s | %-15s | %18s | %15s |\n", 
+                        cPF.getCodigo(), cPF.getNome(), "Física", cPF.getCpf(), 
+                        cPF.getTelefone());
             }
             else if (c instanceof ClientePessoaJuridica) {
-                System.out.printf("| %6d | %-30s | %10.2f |\n", c.getCodigo(), c.getNome(), c.getPreco());
+                ClientePessoaJuridica cPJ = (ClientePessoaJuridica) c;
+                System.out.printf("| %6d | %-30s | %-15s | %18s | %15s |\n", 
+                        cPJ.getCodigo(), cPJ.getNomeFantasia(), "Jurídica", CadastroFornecedor.formatarCnpj(cPJ.getCnpj()), 
+                        cPJ.getTelefone());
             }
         }
         System.out.println("+--------+--------------------------------+-----------------+--------------------+-----------------+");
     }
     
     private void alterar() {
-        System.out.println("\nAlterar registro de produto.\n");
-        
-        // obter o código do produto a alterar
-        System.out.print(" - Código: ");
-        long codigo = input.nextLong();
-        input.nextLine();
-        
-        // procurar o produto para alterar na lista de produtos
-        Produto p = new Produto(codigo, "", 0);
-        Produto produtoParaAlterar = ArmazenamentoProduto.buscar(p);
-
-        // caso não encontre, exibir mensagem de erro ao usuário
-        if (produtoParaAlterar == null) {
-            System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
-            return;
-        }
-        
-        // exibir nome
-        System.out.println("\n - Nome: " + produtoParaAlterar.getNome());
-        // perguntar se quer alterar o nome
-        System.out.print(" --> Alterar o nome? (s=sim/n=não) ");
-        char opcaoNome = input.nextLine().charAt(0);
-        
-        String nome = produtoParaAlterar.getNome();
-        if (opcaoNome == 's') {
-            System.out.print(" - Novo nome: ");
-            nome = input.nextLine();
-        }
-        
-        // exibir preço
-        System.out.printf("\n - Preço: %.2f\n", produtoParaAlterar.getPreco());
-        // perguntar se quer alterar o preço
-        System.out.print(" --> Alterar o preço? (s=sim/n=não) ");
-        char opcaoPreco = input.nextLine().charAt(0);
-        
-        double preco = produtoParaAlterar.getPreco();
-        if (opcaoPreco == 's') {
-            System.out.print(" - Novo preço: ");
-            preco = input.nextDouble();
-            input.nextLine();
-        }
-        
-        // confirmação final!!!
-        System.out.println("\nConfirma alteração do produto?");
-        System.out.printf(" - Código: %d\n", produtoParaAlterar.getCodigo());
-        System.out.printf(" - Nome..: %s\n", nome);
-        System.out.printf(" - Preço.: %.2f\n", preco);
-        System.out.print(" --> (s=sim/n=não) ");
-        char opcao = input.nextLine().charAt(0);
-        if (opcao == 's') {
-            Produto produtoAlterado = new Produto(codigo, nome, preco);
-            ArmazenamentoProduto.alterar(produtoAlterado);
-        }
+//        System.out.println("\nAlterar registro de cliente.\n");
+//        
+//        // obter o código do cliente a alterar
+//        System.out.print(" - Código: ");
+//        long codigo = input.nextLong();
+//        input.nextLine();
+//        
+//        // procurar o produto para alterar na lista de clientes
+//        Cliente c = new Cliente(codigo);
+//        Cliente clienteParaAlterar = ArmazenamentoCliente.buscar(c);
+//
+//        // caso não encontre, exibir mensagem de erro ao usuário
+//        if (clienteParaAlterar == null) {
+//            System.out.println("NÃO HÁ CLIENTE CADASTRADO COM O CÓDIGO INFORMADO.");
+//            return;
+//        }
+//        
+//        // exibir nome
+//        System.out.println("\n - Nome: " + clienteParaAlterar.getNome());
+//        // perguntar se quer alterar o nome
+//        System.out.print(" --> Alterar o nome? (s=sim/n=não) ");
+//        char opcaoNome = input.nextLine().charAt(0);
+//        
+//        String nome = clienteParaAlterar.getNome();
+//        if (opcaoNome == 's') {
+//            System.out.print(" - Novo nome: ");
+//            nome = input.nextLine();
+//        }
+//        
+//        // exibir preço
+//        System.out.printf("\n - Preço: %.2f\n", clienteParaAlterar.getPreco());
+//        // perguntar se quer alterar o preço
+//        System.out.print(" --> Alterar o preço? (s=sim/n=não) ");
+//        char opcaoPreco = input.nextLine().charAt(0);
+//        
+//        double preco = clienteParaAlterar.getPreco();
+//        if (opcaoPreco == 's') {
+//            System.out.print(" - Novo preço: ");
+//            preco = input.nextDouble();
+//            input.nextLine();
+//        }
+//        
+//        // confirmação final!!!
+//        System.out.println("\nConfirma alteração do produto?");
+//        System.out.printf(" - Código: %d\n", clienteParaAlterar.getCodigo());
+//        System.out.printf(" - Nome..: %s\n", nome);
+//        System.out.printf(" - Preço.: %.2f\n", preco);
+//        System.out.print(" --> (s=sim/n=não) ");
+//        char opcao = input.nextLine().charAt(0);
+//        if (opcao == 's') {
+//            Produto produtoAlterado = new Produto(codigo, nome, preco);
+//            ArmazenamentoProduto.alterar(produtoAlterado);
+//        }
     }
     
     private void excluir() {
-        System.out.println("\nExcluir registro de produto.\n");
+        System.out.println("\nExcluir registro de cliente.\n");
         
-        // obter o código do produto a excluir
-        System.out.print(" - Código do produto a excluir: ");
+        // obter o código do cliente a excluir
+        System.out.print(" - Código do cliente a excluir: ");
         long codigo = input.nextLong();
         input.nextLine();
         
-        // buscar dados do produto para confirmação de exclusão
-        Produto parametroBusca = new Produto(codigo, "", 0);
-        Produto produtoExcluir = ArmazenamentoProduto.buscar(parametroBusca);
+        // buscar dados do cliente para confirmação de exclusão
+        Cliente parametroBusca = new Cliente(codigo);
+        Cliente clienteExcluir = ArmazenamentoCliente.buscar(parametroBusca);
         
-        if (produtoExcluir == null) {
-            System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
+        if (clienteExcluir == null) {
+            System.out.println("NÃO HÁ CLIENTE CADASTRADO COM O CÓDIGO INFORMADO.");
             return;
         }
         
-        System.out.println(" - Nome.: " + produtoExcluir.getNome());
-        System.out.printf(" - Preço: %.2f\n", produtoExcluir.getPreco());
+        if (clienteExcluir instanceof ClientePessoaFisica) {
+            ClientePessoaFisica c = (ClientePessoaFisica) clienteExcluir;
+            System.out.printf(" - Nome..............: %s\n", c.getNome());
+            System.out.printf(" - Data de nascimento: %s\n", DateFormat.getDateInstance().format(c.getDataNascimento()));
+            System.out.printf(" - Sexo..............: %s\n", c.getSexo());
+            System.out.printf(" - CPF...............: %s\n", c.getCpf());
+        } else if (clienteExcluir instanceof ClientePessoaJuridica) {
+            ClientePessoaJuridica c = (ClientePessoaJuridica) clienteExcluir;
+            System.out.printf(" - Nome fantasia.....: %s\n", c.getNomeFantasia());
+            System.out.printf(" - Razão social......: %s\n", c.getRazaoSocial());
+            System.out.printf(" - CNPJ..............: %s\n", CadastroFornecedor.formatarCnpj(c.getCnpj()));
+            System.out.printf(" - Inscrição estadual: %s\n", c.getInscricaoEstadual());
+        }
+        System.out.println(" - Endereço..........: " + clienteExcluir.getEndereco());
+        System.out.println(" - Telefone..........: " + clienteExcluir.getTelefone());
+        System.out.println(" - Email.............: " + clienteExcluir.getEmail());
         System.out.print("\n  --> Confirma exclusão? (s=sim/n=não) ");
         
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            ArmazenamentoProduto.excluir(produtoExcluir);
+            ArmazenamentoCliente.excluir(clienteExcluir);
         }
     }
 }

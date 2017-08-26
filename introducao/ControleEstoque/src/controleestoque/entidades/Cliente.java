@@ -12,6 +12,10 @@ public class Cliente {
     private String endereco;
     private String telefone;
     private String email;
+    
+    public Cliente(long codigo) {
+        this.codigo = codigo;
+    }
 
     public Cliente(long codigo, String endereco, String telefone, String email) {
         this.codigo = codigo;
