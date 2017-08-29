@@ -74,6 +74,16 @@ Vendedor (especialização de Funcionário)
   
 Comprador (especialização de Funcionário)
 
+  --> Implementar:
+    - Classe: entidades.Funcionario, entidades.Comprador,
+    entidades.Vendedor (já prontas)
+    - Classe: armazenamento.ArmazenamentoFuncionario
+    - Classe: fronteiras.CadastroFuncionario
+  --> Acrescentar chamada ao método exibirMenu da classe CadastroFuncionario ao método processarOpcaoUsuario da classe MenuPrincipal
+  --> Acrescentar chamada ao método iniciarLista da classe ArmazenamentoFuncionario ao método main da classe ControleEstoque
+  
+
+
 Compra
  atributos:
   - código
