@@ -5,12 +5,16 @@ package controleestoque;
 
 import controleestoque.armazenamento.ArmazenamentoCliente;
 import controleestoque.armazenamento.ArmazenamentoFornecedor;
+import controleestoque.armazenamento.ArmazenamentoFuncionario;
 import controleestoque.armazenamento.ArmazenamentoProduto;
 import controleestoque.entidades.Cliente;
 import controleestoque.entidades.ClientePessoaFisica;
 import controleestoque.entidades.ClientePessoaJuridica;
+import controleestoque.entidades.Comprador;
 import controleestoque.entidades.Fornecedor;
+import controleestoque.entidades.Funcionario;
 import controleestoque.entidades.Produto;
+import controleestoque.entidades.Vendedor;
 import controleestoque.fronteiras.MenuPrincipal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,6 +34,7 @@ public class ControleEstoque {
         ArmazenamentoProduto.iniciarLista();
         ArmazenamentoFornecedor.iniciarLista();
         ArmazenamentoCliente.iniciarLista();
+        ArmazenamentoFuncionario.iniciarLista();
         
         cadastrarDadosParaTestes();
         
@@ -41,6 +46,7 @@ public class ControleEstoque {
         ArrayList<Produto> listaProduto = ArmazenamentoProduto.getLista();
         ArrayList<Fornecedor> listaFornecedor = ArmazenamentoFornecedor.getLista();
         ArrayList<Cliente> listaCliente = ArmazenamentoCliente.getLista();
+        ArrayList<Funcionario> listaFuncionario = ArmazenamentoFuncionario.getLista();
         
         listaProduto.add(new Produto(1, "Banana", 2.5));
         listaProduto.add(new Produto(2, "Melão", 5.4));
@@ -89,6 +95,13 @@ public class ControleEstoque {
         } catch (ParseException e) {
             // nada a fazer...
         }
+        
+        // funcionários
+        listaFuncionario.add(new Vendedor(1, "Whoopi Harris", 7625544905L,"P.O. Box 789, 1156 Nullam Road","83-39092-5888","Sed.eu@gravidanuncsed.org"));
+        listaFuncionario.add(new Comprador(2, "Mercedes Conner", 4914862412L, "823-7258 Quam Rd.","06-26330-4494","Morbi.accumsan@dolorFusce.edu"));
+        listaFuncionario.add(new Vendedor(3, "Leo Leonard", 1726795296L, "351-393 Et Rd.", "43-89453-2921", "auctor.ullamcorper.nisl@loremsemper.co.uk"));
+        listaFuncionario.add(new Comprador(4, "Desiree Vincent", 1956097847L, "P.O. Box 316, 137 Luctus Road", "90-97352-4242", "Sed.eget.lacus@Integertincidunt.net"));
+        listaFuncionario.add(new Vendedor(5, "Jessica Berger", 2936004070L, "Ap #950-2160 Et Street", "21-18198-1646", "Cal@Aeneanegestas.co.uk"));
     }
     
 }
