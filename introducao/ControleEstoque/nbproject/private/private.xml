@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/Cliente.java</file>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/fronteiras/MenuPrincipal.java</file>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/ClientePessoaJuridica.java</file>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/ClientePessoaFisica.java</file>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/fronteiras/CadastroCliente.java</file>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/fronteiras/CadastroFornecedor.java</file>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/ControleEstoque.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/ItemCompra.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/Compra.java</file>
         </group>
     </open-files>
 </project-private>

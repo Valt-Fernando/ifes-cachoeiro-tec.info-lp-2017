@@ -100,6 +100,8 @@ Item-Compra
   - preço-de-compra
   - quantidade
 
+  
+  
 Venda
  atributos:
   - código

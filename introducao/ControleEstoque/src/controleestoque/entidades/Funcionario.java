@@ -14,6 +14,10 @@ public class Funcionario {
     private String endereco;
     private String telefone;
     private String email;
+    
+    public Funcionario(long codigo) {
+        this.codigo = codigo;
+    }
 
     public Funcionario(long codigo, String nome, long cpf, String endereco, 
             String telefone, String email) {
