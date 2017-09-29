@@ -13,6 +13,10 @@ public class Produto {
     private String nome;
     private double preco;
     
+    public Produto(long codigo) {
+        this.codigo = codigo;
+    }
+
     public Produto(long codigo, String nome, double preco) {
         this.codigo = codigo;
         this.nome = nome;
