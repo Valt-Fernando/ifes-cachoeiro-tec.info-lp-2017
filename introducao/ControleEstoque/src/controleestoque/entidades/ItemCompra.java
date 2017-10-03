@@ -22,6 +22,10 @@ public class ItemCompra {
         this.precoCompra = precoCompra;
         this.quantidade = quantidade;
     }
+    
+    public ItemCompra(long codigo) {
+        this.codigo = codigo;
+    }
 
     public long getCodigo() {
         return codigo;

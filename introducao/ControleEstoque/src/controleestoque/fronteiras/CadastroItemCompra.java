@@ -117,85 +117,121 @@ public class CadastroItemCompra {
     }
     
     private void alterar() {
-        System.out.println("\nAlterar registro de produto.\n");
+        System.out.println("\nAlterar registro de item de compra.\n");
         
-        // obter o código do produto a alterar
+        // obter o código do item a alterar
         System.out.print(" - Código: ");
         long codigo = input.nextLong();
         input.nextLine();
         
-        // procurar o produto para alterar na lista de produtos
-        Produto p = new Produto(codigo, "", 0);
-        Produto produtoParaAlterar = ArmazenamentoProduto.buscar(p);
+        // procurar o item de compra para alterar na lista de itens de compra
+        ItemCompra i = new ItemCompra(codigo);
+        ItemCompra itemParaAlterar = ArmazenamentoItemCompra.buscar(i);
 
         // caso não encontre, exibir mensagem de erro ao usuário
-        if (produtoParaAlterar == null) {
-            System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
+        if (itemParaAlterar == null) {
+            System.out.println("NÃO HÁ ITEM CADASTRADO COM O CÓDIGO INFORMADO.");
             return;
         }
         
-        // exibir nome
-        System.out.println("\n - Nome: " + produtoParaAlterar.getNome());
-        // perguntar se quer alterar o nome
-        System.out.print(" --> Alterar o nome? (s=sim/n=não) ");
-        char opcaoNome = input.nextLine().charAt(0);
+        // exibir produto
+        System.out.printf("\n - Produto: %d - %s\n" + 
+                itemParaAlterar.getProduto().getCodigo(),
+                itemParaAlterar.getProduto().getNome());
+        // perguntar se quer alterar o produto
+        System.out.print(" --> Alterar o produto? (s=sim/n=não) ");
+        char opcaoProduto = input.nextLine().charAt(0);
         
-        String nome = produtoParaAlterar.getNome();
-        if (opcaoNome == 's') {
-            System.out.print(" - Novo nome: ");
-            nome = input.nextLine();
+        Produto produto = itemParaAlterar.getProduto();
+        if (opcaoProduto == 's') {
+            boolean produtoExistente = false;
+            do {
+                System.out.print(" - Novo produto (código): ");
+                long codigoProduto = input.nextLong();
+                Produto novoProduto = ArmazenamentoProduto.buscar(new Produto(codigoProduto));
+                if (novoProduto != null) {
+                    produtoExistente = true;
+                    produto = novoProduto;
+                } else {
+                    System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
+                }
+            } while (!produtoExistente);
         }
         
-        // exibir preço
-        System.out.printf("\n - Preço: %.2f\n", produtoParaAlterar.getPreco());
-        // perguntar se quer alterar o preço
-        System.out.print(" --> Alterar o preço? (s=sim/n=não) ");
-        char opcaoPreco = input.nextLine().charAt(0);
+        // exibir preço de compra
+        System.out.printf("\n - Preço de compra: %.2f\n", itemParaAlterar.getPrecoCompra());
+        // perguntar se quer alterar o preço de compra
+        System.out.print(" --> Alterar o preço de compra? (s=sim/n=não) ");
+        char opcaoPrecoCompra = input.nextLine().charAt(0);
         
-        double preco = produtoParaAlterar.getPreco();
-        if (opcaoPreco == 's') {
-            System.out.print(" - Novo preço: ");
-            preco = input.nextDouble();
+        double precoCompra = itemParaAlterar.getPrecoCompra();
+        if (opcaoPrecoCompra == 's') {
+            System.out.print(" - Novo preço de compra: ");
+            precoCompra = input.nextDouble();
+            input.nextLine();
+        }
+        
+        // exibir quantidade
+        System.out.printf("\n - Quantidade: %d\n", itemParaAlterar.getQuantidade());
+        // perguntar se quer alterar a quantidade
+        System.out.print(" --> Alterar a quantidade? (s=sim/n=não) ");
+        char opcaoQuantidade = input.nextLine().charAt(0);
+        
+        int quantidade = itemParaAlterar.getQuantidade();
+        if (opcaoQuantidade == 's') {
+            System.out.print(" - Nova quantidade: ");
+            quantidade = input.nextInt();
             input.nextLine();
         }
         
         // confirmação final!!!
-        System.out.println("\nConfirma alteração do produto?");
-        System.out.printf(" - Código: %d\n", produtoParaAlterar.getCodigo());
-        System.out.printf(" - Nome..: %s\n", nome);
-        System.out.printf(" - Preço.: %.2f\n", preco);
+        System.out.println("\nConfirma alteração do item de compra?");
+        System.out.printf(" - Código.........: %d\n", itemParaAlterar.getCodigo());
+        System.out.printf(" - Produto........: %d - %s\n", produto.getCodigo(), 
+                produto.getNome());
+        System.out.printf(" - Preço de compra: %.2f\n", precoCompra);
+        System.out.printf(" - Quantidade.....: %d\n", quantidade);
+        
         System.out.print(" --> (s=sim/n=não) ");
         char opcao = input.nextLine().charAt(0);
+        
         if (opcao == 's') {
-            Produto produtoAlterado = new Produto(codigo, nome, preco);
-            ArmazenamentoProduto.alterar(produtoAlterado);
+            ItemCompra itemAlterado = new ItemCompra(codigo, compraReferencia, 
+                    produto, precoCompra, quantidade);
+            
+            ArmazenamentoItemCompra.alterar(itemAlterado);
         }
     }
     
     private void excluir() {
-        System.out.println("\nExcluir registro de produto.\n");
+        System.out.println("\nExcluir registro de item de compra.\n");
         
-        // obter o código do produto a excluir
-        System.out.print(" - Código do produto a excluir: ");
+        // obter o código do item de compra a excluir
+        System.out.print(" - Código do item a excluir: ");
         long codigo = input.nextLong();
         input.nextLine();
         
-        // buscar dados do produto para confirmação de exclusão
-        Produto parametroBusca = new Produto(codigo, "", 0);
-        Produto produtoExcluir = ArmazenamentoProduto.buscar(parametroBusca);
+        // buscar dados do item para confirmação de exclusão
+        ItemCompra parametroBusca = new ItemCompra(codigo);
+        ItemCompra itemExcluir = ArmazenamentoItemCompra.buscar(parametroBusca);
         
-        if (produtoExcluir == null) {
-            System.out.println("NÃO HÁ PRODUTO CADASTRADO COM O CÓDIGO INFORMADO.");
+        if (itemExcluir == null) {
+            System.out.println("NÃO HÁ ITEM CADASTRADO COM O CÓDIGO INFORMADO.");
             return;
         }
         
-        System.out.println(" - Nome.: " + produtoExcluir.getNome());
-        System.out.printf(" - Preço: %.2f\n", produtoExcluir.getPreco());
+        System.out.printf(" - Código.........: %d\n", itemExcluir.getCodigo());
+        System.out.printf(" - Produto........: %d - %s\n", 
+                itemExcluir.getProduto().getCodigo(), 
+                itemExcluir.getProduto().getNome());
+        System.out.printf(" - Preço de compra: %.2f\n", itemExcluir.getPrecoCompra());
+        System.out.printf(" - Quantidade.....: %d\n", itemExcluir.getQuantidade());
+
         System.out.print("\n  --> Confirma exclusão? (s=sim/n=não) ");
         
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            ArmazenamentoProduto.excluir(produtoExcluir);
+            ArmazenamentoItemCompra.excluir(itemExcluir);
         }
     }
 }
