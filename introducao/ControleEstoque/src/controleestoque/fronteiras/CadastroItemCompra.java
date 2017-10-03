@@ -104,7 +104,7 @@ public class CadastroItemCompra {
         ArmazenamentoItemCompra.inserir(novoItemCompra);
     }
     
-    private void listar() {
+    protected void listar() {
         System.out.println("\nListagem de itens de compra registrados.\n");
         System.out.println("+--------+--------------------------------+------------+------------+");
         System.out.println("| Código | Produto                        | Preço      | Quantidade |");

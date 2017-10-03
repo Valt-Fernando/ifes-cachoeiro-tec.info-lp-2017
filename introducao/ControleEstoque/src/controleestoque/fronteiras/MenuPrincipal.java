@@ -57,6 +57,8 @@ public class MenuPrincipal {
                 cadastroFuncionario.exibirMenu();
                 break;
             case OPCAO_CADASTRO_COMPRA:
+                CadastroCompra cadastroCompra = new CadastroCompra();
+                cadastroCompra.exibirMenu();
                 break;
             case OPCAO_CADASTRO_VENDA:
                 break;
