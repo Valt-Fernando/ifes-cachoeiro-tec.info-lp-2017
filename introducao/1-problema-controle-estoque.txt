@@ -103,7 +103,9 @@ Item-Compra
 
   --> Implementar:
     - Métodos da classe CadastroCompra:
-        - Alterar: deve solicitar o código da compra e, para cada campo da compra com o código informado (data, valor-total, comprador e fornecedor), apresentar o dado cadastrado, questionar se deseja alterar e, se resposta for positiva, solicitar o novo valor para o campo e armazená-lo. Depois de fazer as modificações nos campos da classe Compra, exibir o menu de cadastro de item de compra, para permitir que o usuário faça as modificações necessárias nos itens da compra que está em edição.
+
+        - Alterar: deve solicitar o código da compra e, para cada campo da compra com o código informado (data, comprador e fornecedor), apresentar o dado cadastrado, questionar se deseja alterar e, se resposta for positiva, solicitar o novo valor para o campo e armazená-lo. Depois de fazer as modificações nos campos da classe Compra, exibir o menu de cadastro de item de compra, para permitir que o usuário faça as modificações necessárias nos itens da compra que está em edição. Os itens de compra devem ser atualizados no registro de compra, para atualizar o valor total.
+        
         - Excluir: deve solicitar o código da compra e excluir o registro com tal código, se houver.
   
 Venda
