@@ -7,11 +7,13 @@ import controleestoque.armazenamento.ArmazenamentoCompra;
 import controleestoque.armazenamento.ArmazenamentoFornecedor;
 import controleestoque.armazenamento.ArmazenamentoFuncionario;
 import controleestoque.armazenamento.ArmazenamentoItemCompra;
+import controleestoque.armazenamento.ArmazenamentoProduto;
 import controleestoque.entidades.Compra;
 import controleestoque.entidades.Comprador;
 import controleestoque.entidades.Fornecedor;
 import controleestoque.entidades.Funcionario;
 import controleestoque.entidades.ItemCompra;
+import controleestoque.entidades.Produto;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Date;
@@ -145,6 +147,32 @@ public class CadastroCompra {
         if (opcao == 's') {
             ArmazenamentoCompra.inserir(compra);
         }
+    }
+
+    private void listar() {
+        System.out.println("\nListagem de compras registradas.\n");
+        System.out.println("+--------+------------+-------------+--------------------------------+--------------------------------+");
+        System.out.println("| Código | Data       | Valor total | Comprador                      | Fornecedor                     |");
+        System.out.println("+--------+------------+-------------+--------------------------------+--------------------------------+");
+        DateFormat df = DateFormat.getDateInstance();
+        for (Compra c : ArmazenamentoCompra.getLista()) {
+            String nomeComprador = c.getComprador().getNome();
+            nomeComprador = nomeComprador.length() > 30 ? nomeComprador.substring(0, 30) : nomeComprador;
+            String nomeFornecedor = c.getFornecedor().getNomeFantasia();
+            nomeFornecedor = nomeFornecedor.length() > 30 ? nomeFornecedor.substring(0, 30) : nomeFornecedor;
+            System.out.printf("| %6d | %-10s | %11.2f | %-30s | %-30s |\n", 
+                    c.getCodigo(), df.format(c.getData()), c.getValorTotal(), 
+                    nomeComprador, nomeFornecedor);
+        }
+        System.out.println("+--------+------------+-------------+--------------------------------+--------------------------------+");
+    }
+
+    private void alterar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void excluir() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

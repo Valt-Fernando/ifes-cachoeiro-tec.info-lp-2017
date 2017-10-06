@@ -91,6 +91,7 @@ Compra
   - valor-total
   - comprador
   - fornecedor
+  - lista-item-compra
   
 Item-Compra
  atributos:
@@ -100,7 +101,10 @@ Item-Compra
   - preço-de-compra
   - quantidade
 
-  
+  --> Implementar:
+    - Métodos da classe CadastroCompra:
+        - Alterar: deve solicitar o código da compra e, para cada campo da compra com o código informado (data, valor-total, comprador e fornecedor), apresentar o dado cadastrado, questionar se deseja alterar e, se resposta for positiva, solicitar o novo valor para o campo e armazená-lo. Depois de fazer as modificações nos campos da classe Compra, exibir o menu de cadastro de item de compra, para permitir que o usuário faça as modificações necessárias nos itens da compra que está em edição.
+        - Excluir: deve solicitar o código da compra e excluir o registro com tal código, se houver.
   
 Venda
  atributos:
@@ -117,3 +121,6 @@ Item-Venda
   - produto
   - preço-de-venda
   - quantidade
+
+  --> Implementar:
+    - Classes necessárias para fazer o cadastro de vendas de modo análogo ao funcionamento do cadastro de compra, porém adaptado para vendas.
