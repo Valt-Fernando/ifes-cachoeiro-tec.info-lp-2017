@@ -11,62 +11,25 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Scanner;
 
 /**
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class CadastroCliente {
+public class CadastroCliente extends Cadastro {
 
-    private static final int OPCAO_INSERIR = 1;
-    private static final int OPCAO_LISTAR = 2;
-    private static final int OPCAO_ALTERAR = 3;
-    private static final int OPCAO_EXCLUIR = 4;
-    private static final int OPCAO_VOLTAR_MENU_ANTERIOR = 5;
-
-    private Scanner input;
-
-    public void exibirMenu() {
-        input = new Scanner(System.in);
-
-        int opcao = 0;
-        while (opcao != OPCAO_VOLTAR_MENU_ANTERIOR) {
-            System.out.println("\n\nOpções do cadastro de clientes:");
-            System.out.println(" 1 - Inserir");
-            System.out.println(" 2 - Listar");
-            System.out.println(" 3 - Alterar");
-            System.out.println(" 4 - Excluir");
-            System.out.println(" 5 - Voltar ao menu anterior");
-            System.out.print("---> Digite o número da opção desejada e tecle ENTER: ");
-
-            opcao = input.nextInt();
-            processarOpcaoUsuario(opcao);
-        }
+    @Override
+    protected String obterTituloMenu() {
+        return "Opções do cadastro de clientes:";
     }
 
-    private void processarOpcaoUsuario(int opcao) {
-        switch (opcao) {
-            case OPCAO_INSERIR:
-                inserir();
-                break;
-            case OPCAO_LISTAR:
-                listar();
-                break;
-            case OPCAO_ALTERAR:
-                alterar();
-                break;
-            case OPCAO_EXCLUIR:
-                excluir();
-                break;
-            default:
-                if (opcao != OPCAO_VOLTAR_MENU_ANTERIOR) {
-                    System.out.println("VOCÊ DIGITOU UMA OPÇÃO INVÁLIDA!");
-                }
-        }
+    @Override
+    protected String obterMensagemSairDoMenu() {
+        return "Voltar ao menu anterior";
     }
 
-    private void inserir() {
+    @Override
+    protected void inserir() {
         System.out.println("\nInserir novo registro de cliente.\n");
 
         System.out.print(" - Código: ");
@@ -168,7 +131,8 @@ public class CadastroCliente {
         }
     }
 
-    private void listar() {
+    @Override
+    protected void listar() {
         System.out.println("\nListagem de clientes registrados.\n");
         System.out.println("+--------+--------------------------------+-----------------+--------------------+-----------------+");
         System.out.println("| Código | Nome/Nome fantasia             | Física/Jurídica | CPF/CNPJ           | Telefone        |");
@@ -189,7 +153,8 @@ public class CadastroCliente {
         System.out.println("+--------+--------------------------------+-----------------+--------------------+-----------------+");
     }
 
-    private void alterar() {
+    @Override
+    protected void alterar() {
         System.out.println("\nAlterar registro de cliente.\n");
 
         // obter o código do cliente a alterar
@@ -416,7 +381,8 @@ public class CadastroCliente {
         }
     }
 
-    private void excluir() {
+    @Override
+    protected void excluir() {
         System.out.println("\nExcluir registro de cliente.\n");
 
         // obter o código do cliente a excluir

@@ -7,7 +7,7 @@ package controleestoque.entidades;
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class Fornecedor {
+public class Fornecedor implements Entidade {
     private long codigo;
     private String nomeFantasia;
     private String razaoSocial;
@@ -34,6 +34,7 @@ public class Fornecedor {
         this.codigo = codigo;
     }
 
+    @Override
     public long getCodigo() {
         return codigo;
     }

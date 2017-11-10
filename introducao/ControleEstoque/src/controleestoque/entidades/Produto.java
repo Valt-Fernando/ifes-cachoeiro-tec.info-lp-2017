@@ -7,7 +7,7 @@ package controleestoque.entidades;
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class Produto {
+public class Produto implements Entidade {
     // atributos:
     private long codigo;
     private String nome;
@@ -23,6 +23,7 @@ public class Produto {
         this.preco = preco;
     }
 
+    @Override
     public long getCodigo() {
         return codigo;
     }

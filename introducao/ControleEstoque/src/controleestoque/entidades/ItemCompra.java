@@ -7,7 +7,7 @@ package controleestoque.entidades;
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class ItemCompra {
+public class ItemCompra implements Entidade {
     private long codigo;
     private Compra compra;
     private Produto produto;
@@ -27,6 +27,7 @@ public class ItemCompra {
         this.codigo = codigo;
     }
 
+    @Override
     public long getCodigo() {
         return codigo;
     }

@@ -7,7 +7,7 @@ package controleestoque.entidades;
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class Cliente {
+public class Cliente implements Entidade {
     private long codigo;
     private String endereco;
     private String telefone;
@@ -24,6 +24,7 @@ public class Cliente {
         this.email = email;
     }
 
+    @Override
     public long getCodigo() {
         return codigo;
     }

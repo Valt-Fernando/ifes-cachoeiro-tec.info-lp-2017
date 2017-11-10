@@ -168,7 +168,126 @@ public class CadastroCompra {
     }
 
     private void alterar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("\nAlterar registro de compra.\n");
+        
+        // obter o código da compra a alterar
+        System.out.print(" - Código: ");
+        long codigo = input.nextLong();
+        input.nextLine();
+        
+        // procurar a compra para alterar na lista de compras
+        Compra c = new Compra(codigo);
+        Compra compraParaAlterar = ArmazenamentoCompra.buscar(c);
+
+        // caso não encontre, exibir mensagem de erro ao usuário
+        if (compraParaAlterar == null) {
+            System.out.println("NÃO HÁ COMPRA CADASTRADA COM O CÓDIGO INFORMADO.");
+            return;
+        }
+        
+        // alteração do campo data:
+        DateFormat df = DateFormat.getDateInstance();
+        String dataFormatada = df.format(compraParaAlterar.getData());
+        System.out.println("\n - Data: " + dataFormatada);
+        // perguntar se quer alterar a data
+        System.out.print(" --> Alterar a data? (s=sim/n=não) ");
+        char opcaoData = input.nextLine().charAt(0);
+
+        Date data = compraParaAlterar.getData();
+        if (opcaoData == 's') {
+            boolean dataValida;
+            do {
+                System.out.print(" - Nova data (dd/mm/aaaa): ");
+                String strData = input.nextLine();
+                try {
+                    data = DateFormat.getDateInstance().parse(strData);
+                    dataValida = true;
+                } catch (ParseException e) {
+                    System.out.println("VOCÊ DIGITOU UMA DATA INVÁLIDA!");
+                    dataValida = false;
+                }
+            } while (!dataValida);
+        }
+        
+        // alteração do campo comprador:
+        System.out.printf("\n - Comprador: %d - %s\n",
+                compraParaAlterar.getComprador().getCodigo(),
+                compraParaAlterar.getComprador().getNome());
+        // perguntar se quer alterar o comprador
+        System.out.print(" --> Alterar o comprador? (s=sim/n=não) ");
+        char opcaoComprador = input.nextLine().charAt(0);
+        
+        Comprador comprador = compraParaAlterar.getComprador();
+        if (opcaoComprador == 's') {
+            boolean compradorExistente = false;
+            do {
+                System.out.print(" - Novo comprador (código): ");
+                long codigoComprador = input.nextLong();
+                Funcionario novoComprador = ArmazenamentoFuncionario.buscar(new Funcionario(codigoComprador));
+                if (novoComprador != null && novoComprador instanceof Comprador) {
+                    compradorExistente = true;
+                    comprador = (Comprador) novoComprador;
+                } else {
+                    System.out.println("NÃO HÁ COMPRADOR CADASTRADO COM O CÓDIGO INFORMADO.");
+                }
+            } while (!compradorExistente);
+        }
+        
+        // alteração do campo fornecedor:
+        System.out.printf("\n - Fornecedor: %d - %s\n",
+                compraParaAlterar.getFornecedor().getCodigo(),
+                compraParaAlterar.getFornecedor().getNomeFantasia());
+        // perguntar se quer alterar o fornecedor
+        System.out.print(" --> Alterar o fornecedor? (s=sim/n=não) ");
+        char opcaoFornecedor = input.nextLine().charAt(0);
+        
+        Fornecedor fornecedor = compraParaAlterar.getFornecedor();
+        if (opcaoFornecedor == 's') {
+            boolean fornecedorExistente = false;
+            do {
+                System.out.print(" - Novo fornecedor (código): ");
+                long codigoFornecedor = input.nextLong();
+                Fornecedor novoFornecedor = ArmazenamentoFornecedor.buscar(new Fornecedor(codigoFornecedor));
+                if (novoFornecedor != null) {
+                    fornecedorExistente = true;
+                    fornecedor = novoFornecedor;
+                } else {
+                    System.out.println("NÃO HÁ FORNECEDOR CADASTRADO COM O CÓDIGO INFORMADO.");
+                }
+            } while (!fornecedorExistente);
+        }
+        
+        // confirmação de alteração de dados do registro de compra:
+        System.out.println("\nConfirma alteração da compra?");
+        System.out.printf(" - Código....: %d\n", compraParaAlterar.getCodigo());
+        System.out.printf(" - Data......: %s\n", df.format(data));
+        System.out.printf(" - Comprador.: %d - %s\n", comprador.getCodigo(), 
+                comprador.getNome());
+        System.out.printf(" - Fornecedor: %d - %s\n", fornecedor.getCodigo(), 
+                fornecedor.getNomeFantasia());
+        
+        System.out.print(" --> (s=sim/n=não) ");
+        char opcao = input.nextLine().charAt(0);
+        
+        if (opcao == 's') {
+            Compra compraAlterada = new Compra(codigo, data, comprador, fornecedor);
+            compraAlterada.getItensCompra().addAll(compraParaAlterar.getItensCompra());
+            ArmazenamentoCompra.alterar(compraAlterada);
+        }
+        
+        // edição de itens da compra:
+        System.out.print("\nDeseja editar os itens da compra? (s=sim/n=não) ");
+        opcao = input.nextLine().charAt(0);
+        if (opcao == 's') {
+            compraParaAlterar = ArmazenamentoCompra.buscar(compraParaAlterar);
+            CadastroItemCompra cadastroItemCompra = new CadastroItemCompra(compraParaAlterar);
+            cadastroItemCompra.exibirMenu();
+        }
+        // a lista com os itens da compra está no ArmazenamentoItemCompra
+        compraParaAlterar.getItensCompra().clear();
+        for (ItemCompra i : ArmazenamentoItemCompra.getLista()) {
+            compraParaAlterar.inserirItemCompra(i);
+        }
     }
 
     private void excluir() {

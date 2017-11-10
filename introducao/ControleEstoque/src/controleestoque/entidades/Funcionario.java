@@ -7,7 +7,7 @@ package controleestoque.entidades;
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class Funcionario {
+public class Funcionario implements Entidade {
     private long codigo;
     private String nome;
     private long cpf;
@@ -29,6 +29,7 @@ public class Funcionario {
         this.email = email;
     }
 
+    @Override
     public long getCodigo() {
         return codigo;
     }

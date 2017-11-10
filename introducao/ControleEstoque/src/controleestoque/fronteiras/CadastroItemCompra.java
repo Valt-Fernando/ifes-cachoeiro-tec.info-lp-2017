@@ -135,7 +135,7 @@ public class CadastroItemCompra {
         }
         
         // exibir produto
-        System.out.printf("\n - Produto: %d - %s\n" + 
+        System.out.printf("\n - Produto: %d - %s\n",
                 itemParaAlterar.getProduto().getCodigo(),
                 itemParaAlterar.getProduto().getNome());
         // perguntar se quer alterar o produto

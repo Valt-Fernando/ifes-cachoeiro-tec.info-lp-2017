@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
-public class Compra {
+public class Compra implements Entidade {
     private long codigo;
     private Date data;
     private double valorTotal;
@@ -59,6 +59,7 @@ public class Compra {
         return false;
     }
 
+    @Override
     public long getCodigo() {
         return codigo;
     }
