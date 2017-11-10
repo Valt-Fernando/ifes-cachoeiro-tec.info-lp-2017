@@ -39,7 +39,7 @@ public class ControleEstoque {
         ArmazenamentoFornecedor.iniciarLista();
         ArmazenamentoCliente.iniciarLista();
         ArmazenamentoFuncionario.iniciarLista();
-        ArmazenamentoCompra.iniciarLista();
+//        ArmazenamentoCompra.iniciarLista();
         
         cadastrarDadosParaTestes();
         
@@ -52,7 +52,7 @@ public class ControleEstoque {
         ArrayList<Fornecedor> listaFornecedor = ArmazenamentoFornecedor.getLista();
         ArrayList<Cliente> listaCliente = ArmazenamentoCliente.getLista();
         ArrayList<Funcionario> listaFuncionario = ArmazenamentoFuncionario.getLista();
-        ArrayList<Compra> listaCompra = ArmazenamentoCompra.getLista();
+//        ArrayList<Compra> listaCompra = ArmazenamentoCompra.getLista();
         
         listaProduto.add(new Produto(1, "Banana", 2.5));
         listaProduto.add(new Produto(2, "Melão", 5.4));
@@ -126,11 +126,11 @@ public class ControleEstoque {
         c4.inserirItemCompra(new ItemCompra(1, c4, listaProduto.get(3), 2.7, 20));
         Compra c5 = new Compra(5, DateFormat.getDateInstance().parse("03/10/2017"), comprador1, listaFornecedor.get(0));
         c5.inserirItemCompra(new ItemCompra(0, c5, listaProduto.get(1), 5.15, 25));
-        listaCompra.add(c1);
-        listaCompra.add(c2);
-        listaCompra.add(c3);
-        listaCompra.add(c4);
-        listaCompra.add(c5);
+//        listaCompra.add(c1);
+//        listaCompra.add(c2);
+//        listaCompra.add(c3);
+//        listaCompra.add(c4);
+//        listaCompra.add(c5);
     }
     
 }
