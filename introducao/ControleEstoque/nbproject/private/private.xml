@@ -5,11 +5,15 @@
         <group>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgProdutoDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/ControleEstoque.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/ClienteDAO.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/ClientePessoaJuridica.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/DAOFactory.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/Produto.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PostgreSqlDAOFactory.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgClienteDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/ProdutoDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/fronteiras/CadastroProduto.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/Cliente.java</file>
         </group>
     </open-files>
 </project-private>

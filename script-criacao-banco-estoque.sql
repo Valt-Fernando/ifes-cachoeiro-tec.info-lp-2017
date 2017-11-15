@@ -19,7 +19,8 @@ create table Cliente (
   codigo serial primary key,
   endereco varchar(200) not null,
   telefone varchar(17) not null,
-  email varchar(50) not null
+  email varchar(50) not null,
+  tipo char(1) not null -- 'F': pessoa física; 'J': pessoa jurídica
 );
 
 create table ClientePessoaFisica (
