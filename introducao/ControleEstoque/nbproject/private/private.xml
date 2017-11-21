@@ -5,9 +5,14 @@
         <group>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgProdutoDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/CompraDAO.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/FuncionarioDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/ItemCompraDAO.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/ItemCompra.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgItemCompraDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PostgreSqlDAOFactory.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgFuncionarioDAO.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgCompraDAO.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgClienteDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/Compra.java</file>
         </group>
     </open-files>

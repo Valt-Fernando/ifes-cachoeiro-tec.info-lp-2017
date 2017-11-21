@@ -114,6 +114,14 @@ public class PgItemCompraDAO implements ItemCompraDAO {
     public boolean alterar(ItemCompra itemCompra) {
         try {
             Connection con = PostgreSqlDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(SCRIPT_ALTERAR);
+            ps.setLong(1, itemCompra.getProduto().getCodigo());
+            ps.setDouble(2, itemCompra.getPrecoCompra());
+            ps.setInt(3, itemCompra.getQuantidade());
+            ps.setLong(4, itemCompra.getCodigo());
+            
+            int resultado = ps.executeUpdate();
+            return resultado == 1;
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, 
@@ -128,6 +136,11 @@ public class PgItemCompraDAO implements ItemCompraDAO {
     public boolean excluir(ItemCompra itemCompra) {
         try {
             Connection con = PostgreSqlDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(SCRIPT_EXCLUIR);
+            ps.setLong(1, itemCompra.getCodigo());
+            
+            int resultado = ps.executeUpdate();
+            return resultado == 1;
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, 
@@ -149,6 +162,26 @@ public class PgItemCompraDAO implements ItemCompraDAO {
         
         try {
             Connection con = PostgreSqlDAOFactory.getConnection();
+            PreparedStatement ps = con.prepareStatement(SCRIPT_GET_LISTA);
+            ps.setLong(1, compra.getCodigo());
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                long codigoItem = rs.getLong(1);
+                long codigoProduto = rs.getLong(2);
+                double precoCompra = rs.getDouble(3);
+                int quantidade = rs.getInt(4);
+                String nomeProduto = rs.getString(5);
+                double precoProduto = rs.getDouble(6);
+                
+                Produto produto = new Produto(codigoProduto, nomeProduto, precoProduto);
+                
+                ItemCompra item = new ItemCompra(codigoItem, compra, produto, 
+                        precoCompra, quantidade);
+                
+                listaItemCompra.add(item);
+            }
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, 
