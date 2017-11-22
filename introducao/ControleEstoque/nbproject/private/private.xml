@@ -13,7 +13,8 @@
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgFuncionarioDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgCompraDAO.java</file>
             <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgClienteDAO.java</file>
-            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/entidades/Compra.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/FornecedorDAO.java</file>
+            <file>file:/home/alexandre/MEGA/ifes/disciplinas/tecnico-noturno/Linguagem-de-programação/2017/introducao/ControleEstoque/src/controleestoque/armazenamento/pg/PgFornecedorDAO.java</file>
         </group>
     </open-files>
 </project-private>
