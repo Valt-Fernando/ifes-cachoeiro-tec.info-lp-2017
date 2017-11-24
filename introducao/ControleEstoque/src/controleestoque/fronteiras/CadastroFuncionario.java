@@ -4,6 +4,8 @@
 package controleestoque.fronteiras;
 
 import controleestoque.armazenamento.ArmazenamentoFuncionario;
+import controleestoque.armazenamento.DAOFactory;
+import controleestoque.armazenamento.FuncionarioDAO;
 import controleestoque.entidades.Funcionario;
 import controleestoque.entidades.Comprador;
 import controleestoque.entidades.Vendedor;
@@ -14,6 +16,12 @@ import java.util.Scanner;
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
 public class CadastroFuncionario {
+    
+    private FuncionarioDAO funcionarioDAO;
+    
+    public CadastroFuncionario() {
+        funcionarioDAO = DAOFactory.getDefaultDAOFactory().getFuncionarioDAO();
+    }
 
     private static final int OPCAO_INSERIR = 1;
     private static final int OPCAO_LISTAR = 2;
@@ -97,7 +105,7 @@ public class CadastroFuncionario {
             }
         } while (cargo != 'C' && cargo != 'V');
         
-        ArmazenamentoFuncionario.inserir(novoFuncionario);
+        funcionarioDAO.inserir(novoFuncionario);
     }
     
     private void listar() {
@@ -105,7 +113,7 @@ public class CadastroFuncionario {
         System.out.println("+--------+--------------------------------+-------------+-----------------+-----------+");
         System.out.println("| Código | Nome                           | CPF         | Telefone        | Cargo     |");
         System.out.println("+--------+--------------------------------+-------------+-----------------+-----------+");
-        for (Funcionario f : ArmazenamentoFuncionario.getLista()) {
+        for (Funcionario f : funcionarioDAO.getLista()) {
             System.out.printf("| %6d | %-30s | %11d | %15s | %-9s |\n", f.getCodigo(), f.getNome().substring(0, 30), f.getCpf(),
                     f.getTelefone(), (f instanceof Vendedor ? "Vendedor" : "Comprador"));
         }
@@ -122,7 +130,7 @@ public class CadastroFuncionario {
         
         // procurar o produto para alterar na lista de funcionários
         Funcionario f = new Funcionario(codigo);
-        Funcionario funcionarioParaAlterar = ArmazenamentoFuncionario.buscar(f);
+        Funcionario funcionarioParaAlterar = funcionarioDAO.buscar(f);
 
         // caso não encontre, exibir mensagem de erro ao usuário
         if (funcionarioParaAlterar == null) {
@@ -210,7 +218,7 @@ public class CadastroFuncionario {
             } else {
                 funcionarioAlterado = new Comprador(codigo, nome, cpf, endereco, telefone, email);
             }
-            ArmazenamentoFuncionario.alterar(funcionarioAlterado);
+            funcionarioDAO.alterar(funcionarioAlterado);
         }
     }
     
@@ -224,7 +232,7 @@ public class CadastroFuncionario {
         
         // buscar dados do funcionário para confirmação de exclusão
         Funcionario parametroBusca = new Funcionario(codigo);
-        Funcionario funcionarioExcluir = ArmazenamentoFuncionario.buscar(parametroBusca);
+        Funcionario funcionarioExcluir = funcionarioDAO.buscar(parametroBusca);
         
         if (funcionarioExcluir == null) {
             System.out.println("NÃO HÁ FUNCIONÁRIO CADASTRADO COM O CÓDIGO INFORMADO.");
@@ -242,7 +250,7 @@ public class CadastroFuncionario {
         
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            ArmazenamentoFuncionario.excluir(funcionarioExcluir);
+            funcionarioDAO.excluir(funcionarioExcluir);
         }
     }
 }

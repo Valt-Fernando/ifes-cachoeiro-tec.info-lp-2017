@@ -3,10 +3,11 @@
  */
 package controleestoque.fronteiras;
 
-import controleestoque.armazenamento.ArmazenamentoCompra;
-import controleestoque.armazenamento.ArmazenamentoFornecedor;
-import controleestoque.armazenamento.ArmazenamentoFuncionario;
-import controleestoque.armazenamento.ArmazenamentoItemCompra;
+import controleestoque.armazenamento.CompraDAO;
+import controleestoque.armazenamento.DAOFactory;
+import controleestoque.armazenamento.FornecedorDAO;
+import controleestoque.armazenamento.FuncionarioDAO;
+import controleestoque.armazenamento.ItemCompraDAO;
 import controleestoque.entidades.Compra;
 import controleestoque.entidades.Comprador;
 import controleestoque.entidades.Fornecedor;
@@ -22,6 +23,18 @@ import java.util.Scanner;
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
 public class CadastroCompra {
+    
+    private FuncionarioDAO funcionarioDAO;
+    private FornecedorDAO fornecedorDAO;
+    private ItemCompraDAO itemCompraDAO;
+    private CompraDAO compraDAO;
+    
+    public CadastroCompra() {
+        funcionarioDAO = DAOFactory.getDefaultDAOFactory().getFuncionarioDAO();
+        fornecedorDAO = DAOFactory.getDefaultDAOFactory().getFornecedorDAO();
+        itemCompraDAO = DAOFactory.getDefaultDAOFactory().getItemCompraDAO();
+        compraDAO = DAOFactory.getDefaultDAOFactory().getCompraDAO();
+    }
 
     private static final int OPCAO_INSERIR = 1;
     private static final int OPCAO_LISTAR = 2;
@@ -99,7 +112,7 @@ public class CadastroCompra {
             System.out.print(" - Comprador (código): ");
             long codigoComprador = input.nextLong();
             input.nextLine();
-            Funcionario f = ArmazenamentoFuncionario.buscar(
+            Funcionario f = funcionarioDAO.buscar(
                     new Funcionario(codigoComprador));
             if (f instanceof Comprador) {
                 comprador = (Comprador) f;
@@ -115,7 +128,7 @@ public class CadastroCompra {
             System.out.print(" - Fornecedor (código): ");
             long codigoFornecedor = input.nextLong();
             input.nextLine();
-            fornecedor = ArmazenamentoFornecedor.buscar(new Fornecedor(codigoFornecedor));
+            fornecedor = fornecedorDAO.buscar(new Fornecedor(codigoFornecedor));
             if (fornecedor == null) {
                 System.out.println("O CÓDIGO DIGITADO NÃO É DE UM FORNECEDOR CADASTRADO.");
             }
@@ -126,8 +139,8 @@ public class CadastroCompra {
         CadastroItemCompra cadastroItemCompra = new CadastroItemCompra(compra);
         cadastroItemCompra.exibirMenu();
         
-        // a lista com os itens da compra está no ArmazenamentoItemCompra
-        for (ItemCompra i : ArmazenamentoItemCompra.getLista()) {
+        // a lista com os itens da compra está no armazenamento de dados
+        for (ItemCompra i : itemCompraDAO.getLista(compra)) {
             compra.inserirItemCompra(i);
         }
         
@@ -143,7 +156,7 @@ public class CadastroCompra {
         char opcao = input.nextLine().charAt(0);
         
         if (opcao == 's') {
-            ArmazenamentoCompra.inserir(compra);
+            compraDAO.inserir(compra);
         }
     }
 
@@ -153,7 +166,7 @@ public class CadastroCompra {
         System.out.println("| Código | Data       | Valor total | Comprador                      | Fornecedor                     |");
         System.out.println("+--------+------------+-------------+--------------------------------+--------------------------------+");
         DateFormat df = DateFormat.getDateInstance();
-        for (Compra c : ArmazenamentoCompra.getLista()) {
+        for (Compra c : compraDAO.getLista()) {
             String nomeComprador = c.getComprador().getNome();
             nomeComprador = nomeComprador.length() > 30 ? nomeComprador.substring(0, 30) : nomeComprador;
             String nomeFornecedor = c.getFornecedor().getNomeFantasia();
@@ -175,7 +188,7 @@ public class CadastroCompra {
         
         // procurar a compra para alterar na lista de compras
         Compra c = new Compra(codigo);
-        Compra compraParaAlterar = ArmazenamentoCompra.buscar(c);
+        Compra compraParaAlterar = compraDAO.buscar(c);
 
         // caso não encontre, exibir mensagem de erro ao usuário
         if (compraParaAlterar == null) {
@@ -221,7 +234,7 @@ public class CadastroCompra {
             do {
                 System.out.print(" - Novo comprador (código): ");
                 long codigoComprador = input.nextLong();
-                Funcionario novoComprador = ArmazenamentoFuncionario.buscar(new Funcionario(codigoComprador));
+                Funcionario novoComprador = funcionarioDAO.buscar(new Funcionario(codigoComprador));
                 if (novoComprador != null && novoComprador instanceof Comprador) {
                     compradorExistente = true;
                     comprador = (Comprador) novoComprador;
@@ -245,7 +258,7 @@ public class CadastroCompra {
             do {
                 System.out.print(" - Novo fornecedor (código): ");
                 long codigoFornecedor = input.nextLong();
-                Fornecedor novoFornecedor = ArmazenamentoFornecedor.buscar(new Fornecedor(codigoFornecedor));
+                Fornecedor novoFornecedor = fornecedorDAO.buscar(new Fornecedor(codigoFornecedor));
                 if (novoFornecedor != null) {
                     fornecedorExistente = true;
                     fornecedor = novoFornecedor;
@@ -270,20 +283,20 @@ public class CadastroCompra {
         if (opcao == 's') {
             Compra compraAlterada = new Compra(codigo, data, comprador, fornecedor);
             compraAlterada.getItensCompra().addAll(compraParaAlterar.getItensCompra());
-            ArmazenamentoCompra.alterar(compraAlterada);
+            compraDAO.alterar(compraAlterada);
         }
         
         // edição de itens da compra:
         System.out.print("\nDeseja editar os itens da compra? (s=sim/n=não) ");
         opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            compraParaAlterar = ArmazenamentoCompra.buscar(compraParaAlterar);
+            compraParaAlterar = compraDAO.buscar(compraParaAlterar);
             CadastroItemCompra cadastroItemCompra = new CadastroItemCompra(compraParaAlterar);
             cadastroItemCompra.exibirMenu();
         }
-        // a lista com os itens da compra está no ArmazenamentoItemCompra
+        // a lista com os itens da compra está no armazenamento de dados
         compraParaAlterar.getItensCompra().clear();
-        for (ItemCompra i : ArmazenamentoItemCompra.getLista()) {
+        for (ItemCompra i : itemCompraDAO.getLista(compraParaAlterar)) {
             compraParaAlterar.inserirItemCompra(i);
         }
     }

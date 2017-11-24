@@ -3,7 +3,8 @@
  */
 package controleestoque.fronteiras;
 
-import controleestoque.armazenamento.ArmazenamentoFornecedor;
+import controleestoque.armazenamento.DAOFactory;
+import controleestoque.armazenamento.FornecedorDAO;
 import controleestoque.entidades.Fornecedor;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -14,6 +15,12 @@ import java.util.Scanner;
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
 public class CadastroFornecedor {
+    
+    private FornecedorDAO fornecedorDAO;
+    
+    public CadastroFornecedor() {
+        fornecedorDAO = DAOFactory.getDefaultDAOFactory().getFornecedorDAO();
+    }
 
     private static final int OPCAO_INSERIR = 1;
     private static final int OPCAO_LISTAR = 2;
@@ -85,7 +92,7 @@ public class CadastroFornecedor {
         
         Fornecedor novoFornecedor = new Fornecedor(codigo, nomeFantasia, 
                 razaoSocial, endereco, cnpj, inscricaoEstadual, telefone, email);
-        ArmazenamentoFornecedor.inserir(novoFornecedor);
+        fornecedorDAO.inserir(novoFornecedor);
     }
     
     private void listar() {
@@ -93,7 +100,7 @@ public class CadastroFornecedor {
         System.out.println("+--------+--------------------------------+--------------------+-----------+-------------------+");
         System.out.println("| Código | Nome Fantasia                  | CNPJ               | Insc.Est. | Telefone          |");
         System.out.println("+--------+--------------------------------+--------------------+-----------+-------------------+");
-        for (Fornecedor f : ArmazenamentoFornecedor.getLista()) {
+        for (Fornecedor f : fornecedorDAO.getLista()) {
             System.out.printf("| %6d | %-30s | %18s | %9d | %17s |\n", f.getCodigo(), 
                     f.getNomeFantasia(), formatarCnpj(f.getCnpj()), f.getInscricaoEstadual(),
                     f.getTelefone());
@@ -127,7 +134,7 @@ public class CadastroFornecedor {
         
         // procurar o fornecedor para alterar na lista de fornecedores
         Fornecedor f = new Fornecedor(codigo);
-        Fornecedor fornecedorParaAlterar = ArmazenamentoFornecedor.buscar(f);
+        Fornecedor fornecedorParaAlterar = fornecedorDAO.buscar(f);
 
         // caso não encontre, exibir mensagem de erro ao usuário
         if (fornecedorParaAlterar == null) {
@@ -246,7 +253,7 @@ public class CadastroFornecedor {
             Fornecedor fornecedorAlterado = new Fornecedor(codigo, 
                     nomeFantasia, razaoSocial, endereco, cnpj, 
                     inscricaoEstadual, telefone, email);
-            ArmazenamentoFornecedor.alterar(fornecedorAlterado);
+            fornecedorDAO.alterar(fornecedorAlterado);
         }
     }
     
@@ -260,7 +267,7 @@ public class CadastroFornecedor {
         
         // buscar dados do fornecedor para confirmação de exclusão
         Fornecedor parametroBusca = new Fornecedor(codigo);
-        Fornecedor fornecedorExcluir = ArmazenamentoFornecedor
+        Fornecedor fornecedorExcluir = fornecedorDAO
                 .buscar(parametroBusca);
         
         if (fornecedorExcluir == null) {
@@ -286,7 +293,7 @@ public class CadastroFornecedor {
         
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            ArmazenamentoFornecedor.excluir(fornecedorExcluir);
+            fornecedorDAO.excluir(fornecedorExcluir);
         }
     }
 }

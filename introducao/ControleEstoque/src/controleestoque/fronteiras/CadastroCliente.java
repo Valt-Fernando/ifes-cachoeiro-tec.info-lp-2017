@@ -3,7 +3,8 @@
  */
 package controleestoque.fronteiras;
 
-import controleestoque.armazenamento.ArmazenamentoCliente;
+import controleestoque.armazenamento.ClienteDAO;
+import controleestoque.armazenamento.DAOFactory;
 import controleestoque.entidades.Cliente;
 import controleestoque.entidades.ClientePessoaFisica;
 import controleestoque.entidades.ClientePessoaJuridica;
@@ -17,6 +18,12 @@ import java.util.Date;
  * @author Alexandre Romanelli <alexandre.romanelli@ifes.edu.br>
  */
 public class CadastroCliente extends Cadastro {
+    
+    private ClienteDAO clienteDAO;
+    
+    public CadastroCliente() {
+        clienteDAO = DAOFactory.getDefaultDAOFactory().getClienteDAO();
+    }
 
     @Override
     protected String obterTituloMenu() {
@@ -127,7 +134,7 @@ public class CadastroCliente extends Cadastro {
                 break;
         }
         if (novoCliente != null) {
-            ArmazenamentoCliente.inserir(novoCliente);
+            clienteDAO.inserir(novoCliente);
         }
     }
 
@@ -137,7 +144,7 @@ public class CadastroCliente extends Cadastro {
         System.out.println("+--------+--------------------------------+-----------------+--------------------+-----------------+");
         System.out.println("| Código | Nome/Nome fantasia             | Física/Jurídica | CPF/CNPJ           | Telefone        |");
         System.out.println("+--------+--------------------------------+-----------------+--------------------+-----------------+");
-        for (Cliente c : ArmazenamentoCliente.getLista()) {
+        for (Cliente c : clienteDAO.getLista()) {
             if (c instanceof ClientePessoaFisica) {
                 ClientePessoaFisica cPF = (ClientePessoaFisica) c;
                 System.out.printf("| %6d | %-30s | %-15s | %18s | %15s |\n",
@@ -164,7 +171,7 @@ public class CadastroCliente extends Cadastro {
 
         // procurar o cliente para alterar na lista de clientes
         Cliente c = new Cliente(codigo);
-        Cliente clienteParaAlterar = ArmazenamentoCliente.buscar(c);
+        Cliente clienteParaAlterar = clienteDAO.buscar(c);
 
         // caso não encontre, exibir mensagem de erro ao usuário
         if (clienteParaAlterar == null) {
@@ -377,7 +384,7 @@ public class CadastroCliente extends Cadastro {
                         telefone, email, cnpj, inscricaoEstadual, nomeFantasia, 
                         razaoSocial);
 
-            ArmazenamentoCliente.alterar(clienteAlterado);
+            clienteDAO.alterar(clienteAlterado);
         }
     }
 
@@ -392,7 +399,7 @@ public class CadastroCliente extends Cadastro {
 
         // buscar dados do cliente para confirmação de exclusão
         Cliente parametroBusca = new Cliente(codigo);
-        Cliente clienteExcluir = ArmazenamentoCliente.buscar(parametroBusca);
+        Cliente clienteExcluir = clienteDAO.buscar(parametroBusca);
 
         if (clienteExcluir == null) {
             System.out.println("NÃO HÁ CLIENTE CADASTRADO COM O CÓDIGO INFORMADO.");
@@ -419,7 +426,7 @@ public class CadastroCliente extends Cadastro {
 
         char opcao = input.nextLine().charAt(0);
         if (opcao == 's') {
-            ArmazenamentoCliente.excluir(clienteExcluir);
+            clienteDAO.excluir(clienteExcluir);
         }
     }
 }
