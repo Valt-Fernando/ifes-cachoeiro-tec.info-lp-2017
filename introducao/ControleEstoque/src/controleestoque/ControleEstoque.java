@@ -4,7 +4,6 @@
 package controleestoque;
 
 import controleestoque.armazenamento.ArmazenamentoCliente;
-import controleestoque.armazenamento.ArmazenamentoCompra;
 import controleestoque.armazenamento.ArmazenamentoFornecedor;
 import controleestoque.armazenamento.ArmazenamentoFuncionario;
 import controleestoque.armazenamento.ArmazenamentoProduto;

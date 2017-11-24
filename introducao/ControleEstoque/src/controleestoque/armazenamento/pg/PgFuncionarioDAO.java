@@ -28,7 +28,7 @@ public class PgFuncionarioDAO implements FuncionarioDAO {
     private static final String SCRIPT_INSERIR =
             "insert into funcionario " +
             "       (nome, cpf, endereco, telefone, email, cargo) " +
-            "       (?, ?, ?, ?, ?, ?)";
+            "values (?, ?, ?, ?, ?, ?)";
 
     private static final String SCRIPT_ALTERAR =
             "update funcionario " +

@@ -14,4 +14,9 @@ public class Vendedor extends Funcionario {
         super(codigo, nome, cpf, endereco, telefone, email);
     }
     
+    public Vendedor(String nome, long cpf, String endereco, String telefone,
+            String email) {
+        super(nome, cpf, endereco, telefone, email);
+    }
+   
 }

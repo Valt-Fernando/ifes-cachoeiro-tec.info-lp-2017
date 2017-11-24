@@ -13,5 +13,10 @@ public class Comprador extends Funcionario {
             String telefone, String email) {
         super(codigo, nome, cpf, endereco, telefone, email);
     }
+    
+    public Comprador(String nome, long cpf, String endereco, String telefone,
+            String email) {
+        super(nome, cpf, endereco, telefone, email);
+    }
    
 }

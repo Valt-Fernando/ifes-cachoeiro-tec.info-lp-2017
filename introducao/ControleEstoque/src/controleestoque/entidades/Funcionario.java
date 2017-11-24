@@ -29,6 +29,15 @@ public class Funcionario implements Entidade {
         this.email = email;
     }
 
+    public Funcionario(String nome, long cpf, String endereco, 
+            String telefone, String email) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.telefone = telefone;
+        this.email = email;
+    }
+
     @Override
     public long getCodigo() {
         return codigo;

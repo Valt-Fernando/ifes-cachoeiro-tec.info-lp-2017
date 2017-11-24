@@ -45,6 +45,7 @@ public class CadastroFuncionario {
             System.out.print("---> Digite o número da opção desejada e tecle ENTER: ");
             
             opcao = input.nextInt();
+            input.nextLine(); // <------------------- para consumir a quebra-de-linha!
             processarOpcaoUsuario(opcao);
         }
     }
@@ -72,9 +73,6 @@ public class CadastroFuncionario {
     
     private void inserir() {
         System.out.println("\nInserir novo registro de funcionário.\n");
-        System.out.print(" - Código: ");
-        long codigo = input.nextLong();
-        input.nextLine(); // <------------------- para consumir a quebra-de-linha!
         System.out.print(" - Nome....: ");
         String nome = input.nextLine();
         System.out.print(" - CPF.....: ");
@@ -95,10 +93,10 @@ public class CadastroFuncionario {
 
             switch (cargo) {
                 case 'C':
-                    novoFuncionario = new Comprador(codigo, nome, cpf, endereco, telefone, email);
+                    novoFuncionario = new Comprador(nome, cpf, endereco, telefone, email);
                     break;
                 case 'V':
-                    novoFuncionario = new Vendedor(codigo, nome, cpf, endereco, telefone, email);
+                    novoFuncionario = new Vendedor(nome, cpf, endereco, telefone, email);
                     break;
                 default:
                     System.out.println("VALOR INVÁLIDO! DIGITE C PARA COMPRADOR OU F PARA VENDEDOR.");
@@ -114,8 +112,13 @@ public class CadastroFuncionario {
         System.out.println("| Código | Nome                           | CPF         | Telefone        | Cargo     |");
         System.out.println("+--------+--------------------------------+-------------+-----------------+-----------+");
         for (Funcionario f : funcionarioDAO.getLista()) {
-            System.out.printf("| %6d | %-30s | %11d | %15s | %-9s |\n", f.getCodigo(), f.getNome().substring(0, 30), f.getCpf(),
-                    f.getTelefone(), (f instanceof Vendedor ? "Vendedor" : "Comprador"));
+            String nome = f.getNome();
+            if (nome.length() > 30)
+                nome = nome.substring(0, 30);
+            System.out.printf("| %6d | %-30s | %11d | %15s | %-9s |\n", 
+                    f.getCodigo(), nome, f.getCpf(),
+                    f.getTelefone(), 
+                    (f instanceof Vendedor ? "Vendedor" : "Comprador"));
         }
         System.out.println("+--------+--------------------------------+-------------+-----------------+-----------+");
     }
