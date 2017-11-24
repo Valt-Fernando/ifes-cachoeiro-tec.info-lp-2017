@@ -140,7 +140,7 @@ public class PgFornecedorDAO implements FornecedorDAO {
     public boolean excluir(Fornecedor fornecedor) {
         try {
             Connection con = PostgreSqlDAOFactory.getConnection();
-            PreparedStatement ps = con.prepareStatement(SCRIPT_INSERIR);
+            PreparedStatement ps = con.prepareStatement(SCRIPT_EXCLUIR);
             ps.setLong(1, fornecedor.getCodigo());
             
             int resultado = ps.executeUpdate();
@@ -166,7 +166,7 @@ public class PgFornecedorDAO implements FornecedorDAO {
         
         try {
             Connection con = PostgreSqlDAOFactory.getConnection();
-            PreparedStatement ps = con.prepareStatement(SCRIPT_BUSCAR);
+            PreparedStatement ps = con.prepareStatement(SCRIPT_GET_LISTA);
             
             ResultSet rs = ps.executeQuery();
             
