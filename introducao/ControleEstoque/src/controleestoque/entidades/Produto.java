@@ -17,6 +17,11 @@ public class Produto implements Entidade {
         this.codigo = codigo;
     }
 
+    public Produto(String nome, double preco) {
+        this.nome = nome;
+        this.preco = preco;
+    }
+
     public Produto(long codigo, String nome, double preco) {
         this.codigo = codigo;
         this.nome = nome;

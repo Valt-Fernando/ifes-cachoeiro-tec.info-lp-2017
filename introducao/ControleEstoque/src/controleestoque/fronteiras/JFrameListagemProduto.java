@@ -5,7 +5,9 @@ package controleestoque.fronteiras;
 
 import controleestoque.armazenamento.DAOFactory;
 import controleestoque.armazenamento.ProdutoDAO;
+import controleestoque.entidades.Produto;
 import controleestoque.fronteiras.modelostabelas.ModeloTabelaProduto;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +16,15 @@ import controleestoque.fronteiras.modelostabelas.ModeloTabelaProduto;
 public class JFrameListagemProduto extends javax.swing.JFrame {
     
     private ProdutoDAO produtoDAO;
+    
+    private static JFrameListagemProduto INSTANCIA;
+    
+    public static JFrameListagemProduto getInstancia() {
+        if (INSTANCIA == null) {
+            INSTANCIA = new JFrameListagemProduto();
+        }
+        return INSTANCIA;
+    }
 
     /**
      * Creates new form JFrameListagemProduto
@@ -23,6 +34,11 @@ public class JFrameListagemProduto extends javax.swing.JFrame {
         produtoDAO = DAOFactory.getDefaultDAOFactory().getProdutoDAO();
         ModeloTabelaProduto modeloTabela = new ModeloTabelaProduto(produtoDAO);
         jTableProduto.setModel(modeloTabela);
+    }
+    
+    public void atualizarTabela() {
+        jTableProduto.updateUI();
+        ((ModeloTabelaProduto)jTableProduto.getModel()).fireTableDataChanged();
     }
 
     /**
@@ -35,8 +51,8 @@ public class JFrameListagemProduto extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jButtonInserir = new javax.swing.JButton();
+        jButtonAlterar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableProduto = new javax.swing.JTable();
@@ -44,9 +60,19 @@ public class JFrameListagemProduto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Produtos - Listagem");
 
-        jButton1.setText("Inserir");
+        jButtonInserir.setText("Inserir");
+        jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonInserirActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Alterar");
+        jButtonAlterar.setText("Alterar");
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Excluir");
 
@@ -56,9 +82,9 @@ public class JFrameListagemProduto extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton1)
+                .addComponent(jButtonInserir)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(jButtonAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3)
                 .addContainerGap(538, Short.MAX_VALUE))
@@ -68,8 +94,8 @@ public class JFrameListagemProduto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(jButtonInserir)
+                    .addComponent(jButtonAlterar)
                     .addComponent(jButton3))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -107,7 +133,30 @@ public class JFrameListagemProduto extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
+        JFrameFormularioProduto jFrameFormularioProduto = 
+                new JFrameFormularioProduto();
+        jFrameFormularioProduto.setVisible(true);
+    }//GEN-LAST:event_jButtonInserirActionPerformed
+
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+        // obter produto selecionado na tabela
+        int indiceSelecao = jTableProduto.getSelectedRow();
+        if (indiceSelecao >= 0) {
+            Produto produto = produtoDAO.getLista().get(indiceSelecao);
+            JFrameFormularioProduto jFrameFormularioProduto =
+                    new JFrameFormularioProduto(produto);
+            jFrameFormularioProduto.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, 
+                    "Selecione um registro para alterar.",
+                    "Informação",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,9 +194,9 @@ public class JFrameListagemProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonInserir;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableProduto;
